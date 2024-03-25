@@ -69,6 +69,16 @@ static void protocol_rcv_pack_handle(uint8_t *pack_data, uint16_t cmd, uint8_t s
   return;
 }
 
+/**
+ * @brief Registers a receive command with its corresponding callback function.
+ *
+ * This function registers a receive command with its corresponding callback function in the protocol module.
+ * The registered command and callback function will be used for processing incoming commands.
+ *
+ * @param cmd The command to be registered.
+ * @param rcv_callback The callback function to be associated with the command.
+ * @return 0 if the registration is successful, -1 otherwise.
+ */
 int32_t protocol_rcv_cmd_register(uint16_t cmd, rcv_handle_fn_t rcv_callback)
 {
   for (int i = 0; i < PROTOCOL_CMD_MAX_NUM; i++)
@@ -85,6 +95,21 @@ int32_t protocol_rcv_cmd_register(uint16_t cmd, rcv_handle_fn_t rcv_callback)
   return -1;
 }
 
+/**
+ * @brief Sends a command configuration to the protocol.
+ *
+ * This function is used to send a command configuration to the protocol. The command configuration includes the command code, 
+ * the number of times to resend the command, the timeout for each resend, whether to enable acknowledgement, and the callback 
+ * functions for acknowledgement and non-acknowledgement cases.
+ *
+ * @param cmd The command code to be sent.
+ * @param resend_times The number of times to resend the command if no acknowledgement is received.
+ * @param resend_timeout The timeout duration for each resend attempt.
+ * @param ack_enable Flag indicating whether to enable acknowledgement for the command.
+ * @param ack_callback The callback function to be called when an acknowledgement is received.
+ * @param no_ack_callback The callback function to be called when no acknowledgement is received.
+ * @return 0 if the command configuration is successfully sent, -1 if the command registration fails.
+ */
 int32_t protocol_send_cmd_config(uint16_t cmd,
                                  uint8_t resend_times,
                                  uint16_t resend_timeout,
@@ -110,6 +135,15 @@ int32_t protocol_send_cmd_config(uint16_t cmd,
   return -1;
 }
 
+/**
+ * Unregisters a command in the protocol.
+ *
+ * This function searches for a command with the specified ID in the protocol's receive command information array
+ * and marks it as unused.
+ *
+ * @param cmd The ID of the command to unregister.
+ * @return 0 if the command was successfully unregistered, -1 otherwise.
+ */
 int32_t protocol_rcv_cmd_unregister(uint16_t cmd)
 {
   for (int i = 0; i < PROTOCOL_CMD_MAX_NUM; i++)
@@ -123,6 +157,15 @@ int32_t protocol_rcv_cmd_unregister(uint16_t cmd)
   return -1;
 }
 
+/**
+ * @brief Unregisters a command in the protocol.
+ *
+ * This function searches for a command in the protocol's send command information array
+ * and marks it as unused (used = 0) if found.
+ *
+ * @param cmd The command to unregister.
+ * @return 0 if the command was successfully unregistered, -1 otherwise.
+ */
 int32_t protocol_send_cmd_unregister(uint16_t cmd)
 {
   for (int i = 0; i < PROTOCOL_CMD_MAX_NUM; i++)
@@ -136,12 +179,10 @@ int32_t protocol_send_cmd_unregister(uint16_t cmd)
   return -1;
 }
 
-/**
   /**
     * @brief  Protocol local information initialization function
     * @param  address  Protocol local address, which cannot be changed after initialization. Each device in the same network has a unique address.
     * @retval Protocol return status
-    */
   */
 uint32_t protocol_local_init(uint8_t address)
 {
@@ -191,16 +232,14 @@ uint32_t protocol_local_init(uint8_t address)
   return status;
 }
 
-/**
   /**
     * @brief  Protocol sends a normal frame.
     * @param  reciver Receiver device address
-    *         session Session number, ranging from 0 to 63. When session is 0, no Ack is required from the receiver, otherwise Ack is required. The same receiver device cannot have two identical session numbers at the same time.
-    *         cmd Command value
-    *         p_data Pointer to the data to be sent
-    *         data_len Length of the data to be sent
+    * @param  session Session number, ranging from 0 to 63. When session is 0, no Ack is required from the receiver, otherwise Ack is required. The same receiver device cannot have two identical session numbers at the same time.
+    * @param  cmd Command value
+    * @param  p_data Pointer to the data to be sent
+    * @param  data_len Length of the data to be sent
     * @retval Protocol return status
-    */
   */
 uint32_t protocol_send(uint8_t reciver, uint16_t cmd, void *p_data, uint32_t data_len)
 {
@@ -249,14 +288,13 @@ uint32_t protocol_send(uint8_t reciver, uint16_t cmd, void *p_data, uint32_t dat
   return status;
 }
 
-/**
   /**
     * @brief  Protocol sends an Ack frame. This function should be called to reply with an Ack after receiving a normal frame with a non-zero session.
     * @param  reciver Receiver device address
-    *         session Session number, ranging from 0 to 63. When session is 0, no Ack is required from the receiver, otherwise Ack is required. The same receiver device cannot have two identical session numbers at the same time.
-    *         p_data Pointer to the data to be sent
-    *         data_len Length of the data to be sent
-    *         ack_seq Sequence number of the Ack packet to be sent
+    * @param  session Session number, ranging from 0 to 63. When session is 0, no Ack is required from the receiver, otherwise Ack is required. The same receiver device cannot have two identical session numbers at the same time.
+    * @param  p_data Pointer to the data to be sent
+    * @param  data_len Length of the data to be sent
+    * @param  ack_seq Sequence number of the Ack packet to be sent
     * @retval Protocol return status
   */
 uint32_t protocol_ack(uint8_t reciver, uint8_t session, void *p_data, uint32_t data_len, uint16_t ack_seq)
@@ -274,7 +312,6 @@ uint32_t protocol_ack(uint8_t reciver, uint8_t session, void *p_data, uint32_t d
   return status;
 }
 
-/**
   /**
     * @brief Flushes the send list, calling this function will send the data in the send list. Call after calling protocol_send or protocol_ack, or call periodically.
     * @param void
@@ -307,13 +344,11 @@ uint32_t protocol_send_flush(void)
   return 0;
 }
 
-/**
   /**
     * @brief  Protocol flushes the receive buffer, calling this function will unpack the data in the receive buffer. Call after receiving data or periodically.
     * @param  void
     * @retval Protocol return status
     */
-  */
 uint32_t protocol_unpack_flush(void)
 {
   for (uint8_t i = 0; i < PROTOCOL_INTERFACE_MAX; i++)
@@ -326,15 +361,13 @@ uint32_t protocol_unpack_flush(void)
   return 0;
 }
 
-/**
   /**
     * @brief  Protocol receives data, used when receiving data, such as in interrupt functions for serial communication.
     * @param  p_data Pointer to the received data
-    *         data_len Length of the received data
-    *         interface Interface index, specify the index of the interface where the data is received
+    * @param  data_len Length of the received data
+    * @param  interface Interface index, specify the index of the interface where the data is received
     * @retval Protocol return status
     */
-  */
 uint32_t protocol_rcv_data(void *p_data, uint32_t data_len, struct perph_interface *perph)
 {
   FIFO_CPU_SR_TYPE cpu_sr;
