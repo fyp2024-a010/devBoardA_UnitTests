@@ -615,7 +615,7 @@ uint32_t protocol_s_pack_forward(protocol_pack_desc_t *p_pack, struct perph_inte
   send_node->is_got_ack = 0;
   send_node->is_first_send = 1;
   send_node->address = p_pack->reciver;
-  send_node->pack_type = PROTOCOL_PACK_ACK; //把转发包当做ACK包发送更快捷
+  send_node->pack_type = PROTOCOL_PACK_ACK; //It is faster to send forwarded packets as ACK packets
   send_node->is_ready_realse = 0;
   send_node->cmd = 0;
   send_node->forward_src_obj = src_obj;
@@ -623,9 +623,9 @@ uint32_t protocol_s_pack_forward(protocol_pack_desc_t *p_pack, struct perph_inte
   memcpy(send_node->p_data, p_pack, p_pack->data_len);
   if (p_pack->reciver != PROTOCOL_BROADCAST_ADDR)
   {
-    //非广播包处理
+    //Non-broadcast packet handling
     MUTEX_LOCK(tar_inter->send.mutex_lock);
-    list_add(&(send_node->send_list), &(tar_inter->send.ack_list_header)); //把转发包当做ACK包发送更快捷
+    list_add(&(send_node->send_list), &(tar_inter->send.ack_list_header)); //It is faster to send forwarded packets as ACK packets
     tar_inter->send.ack_node_num++;
     MUTEX_UNLOCK(tar_inter->send.mutex_lock);
 
@@ -634,7 +634,7 @@ uint32_t protocol_s_pack_forward(protocol_pack_desc_t *p_pack, struct perph_inte
   }
   else
   {
-    //广播包处理
+    //Broadcast packet processing
     MUTEX_LOCK(boardcast_object.mutex_lock);
 
     list_add(&(send_node->send_list), &(boardcast_object.send_list_header));
@@ -648,7 +648,7 @@ uint32_t protocol_s_pack_forward(protocol_pack_desc_t *p_pack, struct perph_inte
   return status;
 }
 
-//解包处理函数
+//Unpack processing function
 uint32_t protocol_s_unpack_data_handle(struct perph_interface *obj)
 {
   uint32_t status;
@@ -661,7 +661,7 @@ uint32_t protocol_s_unpack_data_handle(struct perph_interface *obj)
 
 #if PROTOCOL_ROUTE_FOWARD == PROTOCOL_ENABLE
 
-  //若接收地址不符合本地地址，则进行转发
+  //If the receiving address does not match the local address, forward it
   if (p_pack->reciver != protocol_local_info.address)
   {
     status = protocol_s_pack_forward(p_pack, obj);
@@ -715,7 +715,7 @@ uint32_t protocol_s_unpack_data_handle(struct perph_interface *obj)
   return status;
 }
 
-//解包
+//Unpack
 uint32_t protocol_s_extract(struct perph_interface *obj)
 {
   uint32_t status = 0;
@@ -827,7 +827,7 @@ uint32_t protocol_s_extract(struct perph_interface *obj)
   return status;
 }
 
-//找帧头
+//Find frame header
 uint32_t protocol_s_find_pack_header(rcvd_desc_t *rcvd)
 {
   uint32_t status;
@@ -852,7 +852,7 @@ END:
   return status;
 }
 
-//校验包头
+//Verification header
 uint32_t protocol_s_auth_pack_header(rcvd_desc_t *rcvd)
 {
   uint32_t status;
@@ -888,7 +888,7 @@ uint32_t protocol_s_auth_pack_header(rcvd_desc_t *rcvd)
   return status;
 }
 
-//获取包数据
+//Get package data
 uint32_t protocol_s_fetch_pack_data(rcvd_desc_t *rcvd)
 {
   uint32_t status;
@@ -912,7 +912,7 @@ uint32_t protocol_s_fetch_pack_data(rcvd_desc_t *rcvd)
   return status;
 }
 
-//获取版本号和数据长度
+//Get version number and data length
 ver_data_len_t protocol_s_get_ver_datalen(void *pack)
 
 {
@@ -925,7 +925,7 @@ ver_data_len_t protocol_s_get_ver_datalen(void *pack)
   return ver_len;
 }
 
-//答应错误信息
+//Accept error message
 void protocol_s_error_info_printf(uint32_t status, char *file, int line)
 {
   char *err_info;
