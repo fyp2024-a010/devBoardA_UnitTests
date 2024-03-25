@@ -140,7 +140,9 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    extern int32_t test_module_execute(void);
+    test_module_execute();
+    osDelay(2);
   }
   /* USER CODE END StartDefaultTask */
 }
