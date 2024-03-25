@@ -11,10 +11,12 @@
 #include "init.h"
 #include "protocol.h"
 
+extern osThreadId communicate_task_t;
+
 static void protocol_send_success_callback(void);
 static int32_t usb_interface_send(uint8_t *p_data, uint32_t len);
 
-extern osThreadId communicate_task_t;
+
 
 static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len)
 {
