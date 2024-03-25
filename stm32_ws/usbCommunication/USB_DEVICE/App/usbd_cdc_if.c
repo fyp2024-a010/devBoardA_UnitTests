@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "fifo.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,8 +63,7 @@ static usb_vcp_call_back_f usb_vcp_call_back[USB_REC_MAX_NUM];
   */
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
-#define APP_RX_DATA_SIZE  2048
-#define APP_TX_DATA_SIZE  4096
+
 /* USER CODE END PRIVATE_DEFINES */
 
 /**
@@ -97,7 +96,8 @@ uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
 uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
-
+fifo_s_t usb_tx_fifo;
+uint8_t usb_tx_fifo_buff[APP_TX_DATA_SIZE];
 /* USER CODE END PRIVATE_VARIABLES */
 
 /**
