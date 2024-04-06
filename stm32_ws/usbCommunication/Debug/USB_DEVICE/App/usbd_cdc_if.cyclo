@@ -1,0 +1,8 @@
+../USB_DEVICE/App/usbd_cdc_if.c:155:15:CDC_Init_FS	1
+../USB_DEVICE/App/usbd_cdc_if.c:169:15:CDC_DeInit_FS	1
+../USB_DEVICE/App/usbd_cdc_if.c:183:15:CDC_Control_FS	1
+../USB_DEVICE/App/usbd_cdc_if.c:264:15:CDC_Receive_FS	3
+../USB_DEVICE/App/usbd_cdc_if.c:291:9:CDC_Transmit_FS	1
+../USB_DEVICE/App/usbd_cdc_if.c:307:9:usb_tx_flush	2
+../USB_DEVICE/App/usbd_cdc_if.c:346:15:CDC_TransmitCplt_FS	1
+../USB_DEVICE/App/usbd_cdc_if.c:358:9:usb_vcp_rx_callback_register	3

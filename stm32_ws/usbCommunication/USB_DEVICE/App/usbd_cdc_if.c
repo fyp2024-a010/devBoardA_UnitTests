@@ -329,7 +329,7 @@ int32_t usb_tx_flush(void* argc)
 		return result;
 	}
 }
-/* USER CODE END 7 */
+  /* USER CODE END 7 */
 
 /**
   * @brief  CDC_TransmitCplt_FS

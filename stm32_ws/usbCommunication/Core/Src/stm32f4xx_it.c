@@ -98,9 +98,9 @@ void HardFault_Handler(void)
   while (1)
   {
     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
-  if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected  
-    __breakpoint(0);  // halt program execution here         
-  }  
+//  if (CoreDebug->DHCSR & 1) {  //check C_DEBUGEN == 1 -> Debugger Connected
+//    __breakpoint(0);  // halt program execution here
+//  }
     /* USER CODE END W1_HardFault_IRQn 0 */
   }
 }
@@ -274,7 +274,7 @@ void DMA2_Stream6_IRQHandler(void)
 void USART6_IRQHandler(void)
 {
   /* USER CODE BEGIN USART6_IRQn 0 */
-  usart3_idle_callback();
+//  usart3_idle_callback();
   /* USER CODE END USART6_IRQn 0 */
   HAL_UART_IRQHandler(&huart6);
   /* USER CODE BEGIN USART6_IRQn 1 */

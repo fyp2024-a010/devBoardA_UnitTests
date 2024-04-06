@@ -1,0 +1,6 @@
+../usbCommunication/application/offline_check.c:37:23:get_offline_dev	4	static
+../usbCommunication/application/offline_check.c:46:6:offline_init	24	static
+../usbCommunication/application/offline_check.c:84:9:offline_check	16	static
+../usbCommunication/application/offline_check.c:108:9:get_offline_state	8	static
+../usbCommunication/application/offline_check.c:121:9:offline_beep_set_times	16	static
+../usbCommunication/application/offline_check.c:126:9:can1_detect_update	16	static

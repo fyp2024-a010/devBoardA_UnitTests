@@ -1,0 +1,4 @@
+../usbCommunication/application/init.c:52:6:system_config	8	static
+../usbCommunication/application/init.c:57:9:get_sys_cfg	4	static
+../usbCommunication/application/init.c:62:6:hw_init	8	static
+../usbCommunication/application/init.c:104:6:task_init	104	static
