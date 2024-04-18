@@ -173,8 +173,6 @@ void motor_test(void){
   motor_cmd.motor3_rpm = 0;
   motor_cmd.motor4_rpm = 0;
 
-  // float past_error = 0;
-  // float integral = 0;
 	while (1)
 	{
     float motor_1 = pid_calculate(&motor_1_pid, motors_readings.motor_1_measure.speed_rpm, motor_cmd.motor1_rpm);

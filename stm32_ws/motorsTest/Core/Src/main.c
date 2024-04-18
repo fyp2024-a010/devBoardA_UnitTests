@@ -20,16 +20,14 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "can.h"
-#include "dma.h"
 #include "spi.h"
 #include "tim.h"
-#include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "motorTest.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,18 +91,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_SPI5_Init();
   MX_CAN1_Init();
-  MX_USART6_UART_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM12_Init();
-  MX_CAN2_Init();
-  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  motor_test();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -206,6 +200,8 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+		HAL_GPIO_TogglePin(LED_A_GPIO_Port, LED_A_Pin);
+		HAL_Delay(100);
   }
   /* USER CODE END Error_Handler_Debug */
 }
