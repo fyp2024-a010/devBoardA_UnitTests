@@ -1,9 +1,10 @@
 #include "main.h"
 
+#include "timer_task.h"
 #include "blinky_task.h"
 #include "imu_task.h"
 
-#include "imuTest.h"
+#include "init.h"
 
 osThreadId blinky_task_t;
 osThreadId imu_task_t;
