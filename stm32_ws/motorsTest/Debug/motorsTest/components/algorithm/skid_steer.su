@@ -1,0 +1,2 @@
+../motorsTest/components/algorithm/skid_steer.c:28:6:skid_steer_calculate	48	static
+../motorsTest/components/algorithm/skid_steer.c:63:6:skid_steer_position_measure	24	static

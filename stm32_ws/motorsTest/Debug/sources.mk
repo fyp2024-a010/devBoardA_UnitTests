@@ -33,6 +33,13 @@ Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
 Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang \
 USB_DEVICE/App \
 USB_DEVICE/Target \
-motorsTest/algorithm \
 motorsTest/application \
+motorsTest/bsp/boards \
+motorsTest/components/algorithm \
+motorsTest/components/controller \
+motorsTest/components/devices \
+motorsTest/components/modules \
+motorsTest/components/object \
+motorsTest/components/support \
+motorsTest/utilities \
 

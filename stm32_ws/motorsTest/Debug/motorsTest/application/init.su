@@ -1,0 +1,2 @@
+../motorsTest/application/init.c:19:6:hw_init	8	static
+../motorsTest/application/init.c:21:6:init_task	80	static

@@ -1,0 +1,8 @@
+../motorsTest/components/modules/motor_cluster.c:10:9:motor_cluster_pid_register	312	static
+../motorsTest/components/modules/motor_cluster.c:75:9:motor_cluster_execute	64	static
+../motorsTest/components/modules/motor_cluster.c:106:9:motor_cluster_set_rpm	32	static
+../motorsTest/components/modules/motor_cluster.c:120:9:motor_cluster_get_info	24	static
+../motorsTest/components/modules/motor_cluster.c:134:17:motor_cluster_find	24	static
+../motorsTest/components/modules/motor_cluster.c:144:9:motor_cluster_enable	24	static
+../motorsTest/components/modules/motor_cluster.c:157:9:motor_cluster_disable	24	static
+../motorsTest/components/modules/motor_cluster.c:170:16:motor_pid_input_convert	24	static

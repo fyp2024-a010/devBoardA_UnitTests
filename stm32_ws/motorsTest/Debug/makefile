@@ -9,8 +9,15 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include motorsTest/utilities/subdir.mk
+-include motorsTest/components/support/subdir.mk
+-include motorsTest/components/object/subdir.mk
+-include motorsTest/components/modules/subdir.mk
+-include motorsTest/components/devices/subdir.mk
+-include motorsTest/components/controller/subdir.mk
+-include motorsTest/components/algorithm/subdir.mk
+-include motorsTest/bsp/boards/subdir.mk
 -include motorsTest/application/subdir.mk
--include motorsTest/algorithm/subdir.mk
 -include USB_DEVICE/Target/subdir.mk
 -include USB_DEVICE/App/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk

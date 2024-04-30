@@ -1,0 +1,6 @@
+../motorsTest/application/motor_task.c:17:9:motor_can1_output_1ms	16	static
+../motorsTest/application/motor_task.c:24:9:motor_canstd_send	24	static
+../motorsTest/application/motor_task.c:42:9:can1_motor_msg_rec	16	static
+../motorsTest/application/motor_task.c:47:6:motor_task_init	8	static
+../motorsTest/application/motor_task.c:69:9:motor_cluster_push_info	40	static
+../motorsTest/application/motor_task.c:83:6:motor_task	24	static
