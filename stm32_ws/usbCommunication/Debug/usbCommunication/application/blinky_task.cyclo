@@ -1,0 +1,2 @@
+../usbCommunication/application/blinky_task.c:3:9:toggle_led_green	1
+../usbCommunication/application/blinky_task.c:8:6:blinky_task	1

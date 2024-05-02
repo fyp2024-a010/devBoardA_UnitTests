@@ -9,18 +9,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include usbCommunication/utilities/subdir.mk
--include usbCommunication/ulog/subdir.mk
--include usbCommunication/test/subdir.mk
--include usbCommunication/support/subdir.mk
--include usbCommunication/protocol/subdir.mk
--include usbCommunication/object/subdir.mk
--include usbCommunication/modules/subdir.mk
--include usbCommunication/devices/subdir.mk
--include usbCommunication/controller/subdir.mk
--include usbCommunication/boards/subdir.mk
+-include usbCommunication/components/utilities/subdir.mk
+-include usbCommunication/components/support/subdir.mk
+-include usbCommunication/components/object/subdir.mk
 -include usbCommunication/application/subdir.mk
--include usbCommunication/algorithm/subdir.mk
 -include USB_DEVICE/Target/subdir.mk
 -include USB_DEVICE/App/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk

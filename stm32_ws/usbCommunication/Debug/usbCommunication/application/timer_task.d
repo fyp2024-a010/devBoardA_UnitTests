@@ -1,10 +1,7 @@
 usbCommunication/application/timer_task.o: \
  ../usbCommunication/application/timer_task.c \
  ../usbCommunication/application/timer_task.h \
- ../usbCommunication/object/sys.h ../usbCommunication/object/errno.h \
- ../usbCommunication/support/linux_list.h \
- ../usbCommunication/support/mem_mang.h \
- ../usbCommunication/support/macro_mutex.h \
+ ../usbCommunication/components/utilities/soft_timer.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -38,7 +35,7 @@ usbCommunication/application/timer_task.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- ../usbCommunication/support/fifo.h ../usbCommunication/support/MF_CRC.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
@@ -46,7 +43,6 @@ usbCommunication/application/timer_task.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
@@ -55,14 +51,9 @@ usbCommunication/application/timer_task.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../usbCommunication/utilities/soft_timer.h
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 ../usbCommunication/application/timer_task.h:
-../usbCommunication/object/sys.h:
-../usbCommunication/object/errno.h:
-../usbCommunication/support/linux_list.h:
-../usbCommunication/support/mem_mang.h:
-../usbCommunication/support/macro_mutex.h:
+../usbCommunication/components/utilities/soft_timer.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -96,8 +87,7 @@ usbCommunication/application/timer_task.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
-../usbCommunication/support/fifo.h:
-../usbCommunication/support/MF_CRC.h:
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -105,7 +95,6 @@ usbCommunication/application/timer_task.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
-../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
@@ -115,4 +104,3 @@ usbCommunication/application/timer_task.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
-../usbCommunication/utilities/soft_timer.h:

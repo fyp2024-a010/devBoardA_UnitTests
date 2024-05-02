@@ -19,6 +19,15 @@
 
 struct soft_timer soft_timer[TIMER_ELEMENT_NUM_MAX - 1];
 
+/**
+ * @brief Timer task function.
+ * 
+ * This function is responsible for executing the timer tasks.
+ * It checks for expired soft timers and calls their respective callback functions.
+ * The function runs in an infinite loop and delays for a specified period.
+ * 
+ * @param argument Pointer to the task argument (not used in this function).
+ */
 void timer_task(void const *argument)
 {
   uint32_t period = osKernelSysTick();
@@ -44,6 +53,20 @@ void timer_task(void const *argument)
   }
 }
 
+/**
+ * Registers a soft timer callback function with the specified ticks.
+ *
+ * This function registers a soft timer callback function along with the number of ticks
+ * after which the callback should be triggered. The callback function will be called
+ * asynchronously when the specified number of ticks has elapsed.
+ *
+ * @param soft_timer_callback The callback function to be registered.
+ * @param argc                An optional argument to be passed to the callback function.
+ * @param ticks               The number of ticks after which the callback should be triggered.
+ *
+ * @return                    The index of the registered timer element if successful,
+ *                            or -1 if the registration fails (e.g., no available timer element).
+ */
 int32_t soft_timer_register(int32_t (*soft_timer_callback)(void *argc), void *argc, uint32_t ticks)
 {
   for (int i = 0; i < TIMER_ELEMENT_NUM_MAX - 1; i++)

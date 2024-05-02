@@ -24,8 +24,9 @@
   #define TIMER_TASK_H_EXTERN extern
 #endif
 
-#include "sys.h"
+
 #include "soft_timer.h"
+#include "cmsis_os.h"
   
 struct soft_timer
 {

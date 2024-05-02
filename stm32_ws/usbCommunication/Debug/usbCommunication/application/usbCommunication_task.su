@@ -1,0 +1,5 @@
+../usbCommunication/application/usbCommunication_task.c:6:9:int32_to_bytes	24	static
+../usbCommunication/application/usbCommunication_task.c:23:9:bytes_to_int32	24	static
+../usbCommunication/application/usbCommunication_task.c:40:16:usb_rcv_callback	24	static
+../usbCommunication/application/usbCommunication_task.c:50:6:usb_send	24	static
+../usbCommunication/application/usbCommunication_task.c:60:6:usbComm_task	16	static

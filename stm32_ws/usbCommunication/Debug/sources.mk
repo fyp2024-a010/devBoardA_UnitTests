@@ -33,16 +33,8 @@ Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
 Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang \
 USB_DEVICE/App \
 USB_DEVICE/Target \
-usbCommunication/algorithm \
 usbCommunication/application \
-usbCommunication/boards \
-usbCommunication/controller \
-usbCommunication/devices \
-usbCommunication/modules \
-usbCommunication/object \
-usbCommunication/protocol \
-usbCommunication/support \
-usbCommunication/test \
-usbCommunication/ulog \
-usbCommunication/utilities \
+usbCommunication/components/object \
+usbCommunication/components/support \
+usbCommunication/components/utilities \
 

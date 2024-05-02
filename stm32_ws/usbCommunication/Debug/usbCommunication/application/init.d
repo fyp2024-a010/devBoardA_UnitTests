@@ -1,5 +1,6 @@
 usbCommunication/application/init.o: \
- ../usbCommunication/application/init.c ../Core/Inc/main.h \
+ ../usbCommunication/application/init.c \
+ ../usbCommunication/application/init.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,12 +34,11 @@ usbCommunication/application/init.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- ../Core/Inc/can.h ../Core/Inc/main.h ../usbCommunication/boards/board.h \
- ../usbCommunication/object/sys.h ../usbCommunication/object/errno.h \
- ../usbCommunication/support/linux_list.h \
- ../usbCommunication/support/mem_mang.h \
- ../usbCommunication/support/macro_mutex.h \
- ../usbCommunication/support/fifo.h ../usbCommunication/support/MF_CRC.h \
+ ../Core/Inc/can.h ../Core/Inc/main.h \
+ ../usbCommunication/application/blinky_task.h \
+ ../usbCommunication/application/timer_task.h \
+ ../usbCommunication/components/utilities/soft_timer.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
@@ -46,7 +46,6 @@ usbCommunication/application/init.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
@@ -56,39 +55,20 @@ usbCommunication/application/init.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../usbCommunication/boards/drv_can.h \
- ../usbCommunication/boards/drv_dr16.h \
- ../usbCommunication/boards/drv_flash.h \
- ../usbCommunication/boards/drv_imu.h \
- ../usbCommunication/algorithm/ahrs.h ../usbCommunication/boards/drv_io.h \
- ../usbCommunication/boards/drv_uart.h \
- ../usbCommunication/devices/motor.h ../usbCommunication/devices/device.h \
- ../usbCommunication/object/object.h ../usbCommunication/object/sys.h \
- ../usbCommunication/devices/dbus.h ../usbCommunication/devices/detect.h \
- ../usbCommunication/test/test.h ../usbCommunication/modules/chassis.h \
- ../usbCommunication/algorithm/mecanum.h \
- ../usbCommunication/modules/single_gyro.h \
- ../usbCommunication/controller/pid_controller.h \
- ../usbCommunication/algorithm/pid.h \
- ../usbCommunication/controller/controller.h \
- ../usbCommunication/modules/gimbal.h ../usbCommunication/modules/shoot.h \
- ../usbCommunication/application/chassis_task.h \
- ../usbCommunication/application/gimbal_task.h \
- ../usbCommunication/application/timer_task.h \
- ../usbCommunication/utilities/soft_timer.h \
- ../usbCommunication/application/communicate.h \
- ../usbCommunication/application/infantry_cmd.h \
- ../usbCommunication/application/init.h \
- ../usbCommunication/protocol/protocol.h \
- ../usbCommunication/protocol/protocol_common.h \
- ../usbCommunication/protocol/protocol_cfg.h \
- ../usbCommunication/protocol/protocol_interface.h \
- ../usbCommunication/support/macro_mutex.h \
- ../usbCommunication/ulog/ulog.h ../usbCommunication/ulog/ulog_def.h \
- ../usbCommunication/ulog/ulog_config.h \
- ../usbCommunication/application/param.h \
- ../usbCommunication/boards/drv_flash.h \
- ../usbCommunication/application/offline_check.h
+ ../usbCommunication/application/usbCommunication_task.h \
+ ../USB_DEVICE/App/usbd_cdc_if.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../USB_DEVICE/Target/usbd_conf.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
+ ../usbCommunication/components/utilities/usb_vcp_extension.h \
+ ../USB_DEVICE/App/usb_device.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../usbCommunication/components/support/fifo.h
+../usbCommunication/application/init.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -125,14 +105,10 @@ usbCommunication/application/init.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Core/Inc/can.h:
 ../Core/Inc/main.h:
-../usbCommunication/boards/board.h:
-../usbCommunication/object/sys.h:
-../usbCommunication/object/errno.h:
-../usbCommunication/support/linux_list.h:
-../usbCommunication/support/mem_mang.h:
-../usbCommunication/support/macro_mutex.h:
-../usbCommunication/support/fifo.h:
-../usbCommunication/support/MF_CRC.h:
+../usbCommunication/application/blinky_task.h:
+../usbCommunication/application/timer_task.h:
+../usbCommunication/components/utilities/soft_timer.h:
+../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
@@ -140,7 +116,6 @@ usbCommunication/application/init.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
-../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
@@ -150,43 +125,16 @@ usbCommunication/application/init.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
-../usbCommunication/boards/drv_can.h:
-../usbCommunication/boards/drv_dr16.h:
-../usbCommunication/boards/drv_flash.h:
-../usbCommunication/boards/drv_imu.h:
-../usbCommunication/algorithm/ahrs.h:
-../usbCommunication/boards/drv_io.h:
-../usbCommunication/boards/drv_uart.h:
-../usbCommunication/devices/motor.h:
-../usbCommunication/devices/device.h:
-../usbCommunication/object/object.h:
-../usbCommunication/object/sys.h:
-../usbCommunication/devices/dbus.h:
-../usbCommunication/devices/detect.h:
-../usbCommunication/test/test.h:
-../usbCommunication/modules/chassis.h:
-../usbCommunication/algorithm/mecanum.h:
-../usbCommunication/modules/single_gyro.h:
-../usbCommunication/controller/pid_controller.h:
-../usbCommunication/algorithm/pid.h:
-../usbCommunication/controller/controller.h:
-../usbCommunication/modules/gimbal.h:
-../usbCommunication/modules/shoot.h:
-../usbCommunication/application/chassis_task.h:
-../usbCommunication/application/gimbal_task.h:
-../usbCommunication/application/timer_task.h:
-../usbCommunication/utilities/soft_timer.h:
-../usbCommunication/application/communicate.h:
-../usbCommunication/application/infantry_cmd.h:
-../usbCommunication/application/init.h:
-../usbCommunication/protocol/protocol.h:
-../usbCommunication/protocol/protocol_common.h:
-../usbCommunication/protocol/protocol_cfg.h:
-../usbCommunication/protocol/protocol_interface.h:
-../usbCommunication/support/macro_mutex.h:
-../usbCommunication/ulog/ulog.h:
-../usbCommunication/ulog/ulog_def.h:
-../usbCommunication/ulog/ulog_config.h:
-../usbCommunication/application/param.h:
-../usbCommunication/boards/drv_flash.h:
-../usbCommunication/application/offline_check.h:
+../usbCommunication/application/usbCommunication_task.h:
+../USB_DEVICE/App/usbd_cdc_if.h:
+../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+../USB_DEVICE/Target/usbd_conf.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
+../usbCommunication/components/utilities/usb_vcp_extension.h:
+../USB_DEVICE/App/usb_device.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+../usbCommunication/components/support/fifo.h:
