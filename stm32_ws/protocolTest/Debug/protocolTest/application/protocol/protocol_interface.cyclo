@@ -1,0 +1,9 @@
+../protocolTest/components/support/linux_list.h:59:22:INIT_LIST_HEAD	1
+../protocolTest/application/protocol/protocol_interface.c:34:9:protocol_interface_init	7
+../protocolTest/application/protocol/protocol_interface.c:103:9:protocol_can_interface_register	1
+../protocolTest/application/protocol/protocol_interface.c:125:9:protocol_uart_interface_register	1
+../protocolTest/application/protocol/protocol_interface.c:143:9:protocol_interface_send_data	6
+../protocolTest/application/protocol/protocol_interface.c:182:10:protocol_can_rcv_data	5
+../protocolTest/application/protocol/protocol_interface.c:198:10:protocol_uart_rcv_data	4
+../protocolTest/application/protocol/protocol_interface.c:219:9:protocol_set_route	4
+../protocolTest/application/protocol/protocol_interface.c:254:25:protocol_get_interface	3

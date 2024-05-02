@@ -1,0 +1,2 @@
+../protocolTest/application/blinky_task.c:6:9:toggle_led_green	16	static
+../protocolTest/application/blinky_task.c:11:6:blinky_task	24	static

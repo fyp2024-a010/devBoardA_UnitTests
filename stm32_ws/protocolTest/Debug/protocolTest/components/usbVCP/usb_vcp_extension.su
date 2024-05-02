@@ -1,0 +1,7 @@
+../protocolTest/components/usbVCP/usb_vcp_extension.c:9:6:usb_vcp_init	8	static
+../protocolTest/components/usbVCP/usb_vcp_extension.c:11:6:set_usb_tx_need_flushing	24	static,ignoring_inline_asm
+../protocolTest/components/usbVCP/usb_vcp_extension.c:19:6:usb_vcp_receive_processing	24	static
+../protocolTest/components/usbVCP/usb_vcp_extension.c:28:9:usb_vcp_transmit_processing	16	static
+../protocolTest/components/usbVCP/usb_vcp_extension.c:36:9:usb_vcp_rx_callback_register	24	static
+../protocolTest/components/usbVCP/usb_vcp_extension.c:47:9:usb_tx_flush	48	static,ignoring_inline_asm
+../protocolTest/components/usbVCP/usb_vcp_extension.c:73:6:usb_tx_flush_run	16	static
