@@ -30391,7 +30391,7 @@ void motor_task(void const *argument) {
 
   for (;;) {
 
-    motor_cluster_set_rpm(pmotor_cluster, 100, 100, 100, 100);
+    motor_cluster_set_rpm(pmotor_cluster, 0, 0, 0, 0);
  800ade8:	eddf 1a0c 	vldr	s3, [pc, #48]	; 800ae1c <motor_task+0x60>
  800adec:	ed9f 1a0b 	vldr	s2, [pc, #44]	; 800ae1c <motor_task+0x60>
  800adf0:	eddf 0a0a 	vldr	s1, [pc, #40]	; 800ae1c <motor_task+0x60>
@@ -30407,12 +30407,12 @@ void motor_task(void const *argument) {
  800ae08:	2102      	movs	r1, #2
  800ae0a:	4618      	mov	r0, r3
  800ae0c:	f7fd feee 	bl	8008bec <osDelayUntil>
-    motor_cluster_set_rpm(pmotor_cluster, 100, 100, 100, 100);
+    motor_cluster_set_rpm(pmotor_cluster, 0, 0, 0, 0);
  800ae10:	e7ea      	b.n	800ade8 <motor_task+0x2c>
  800ae12:	bf00      	nop
  800ae14:	0800ccbc 	.word	0x0800ccbc
  800ae18:	0800ad7d 	.word	0x0800ad7d
- 800ae1c:	42c80000 	.word	0x42c80000
+ 800ae1c:	00000000 	.word	0x00000000
 
 0800ae20 <timer_task>:
  * The function runs in an infinite loop and delays for a specified period.
