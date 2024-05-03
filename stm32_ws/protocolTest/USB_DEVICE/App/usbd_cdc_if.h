@@ -30,6 +30,7 @@
 #include "usbd_cdc.h"
 
 /* USER CODE BEGIN INCLUDE */
+
 /* USER CODE END INCLUDE */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -50,7 +51,7 @@
 #define APP_RX_DATA_SIZE  2048
 #define APP_TX_DATA_SIZE  2048
 /* USER CODE BEGIN EXPORTED_DEFINES */
-#define USB_REC_MAX_NUM 5
+
 /* USER CODE END EXPORTED_DEFINES */
 
 /**
@@ -107,9 +108,7 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 
 /* USER CODE BEGIN EXPORTED_FUNCTIONS */
-typedef  int32_t(*usb_vcp_call_back_f)(uint8_t *buf, uint32_t len);
-int32_t usb_vcp_rx_callback_register(usb_vcp_call_back_f fun);
-int32_t usb_tx_flush_run(void* argc);
+
 /* USER CODE END EXPORTED_FUNCTIONS */
 
 /**

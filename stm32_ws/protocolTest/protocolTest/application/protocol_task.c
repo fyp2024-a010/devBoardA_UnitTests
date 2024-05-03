@@ -7,6 +7,7 @@ static int32_t usb_interface_send(uint8_t *p_data, uint32_t len);
 static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len);
 
 void protocol_task_init(void) {
+  usb_vcp_init(true);
   protocol_local_init(CHASSIS_ADDRESS);
   protocol_uart_interface_register("manifold2", 4096, 1, PROTOCOL_USB_PORT,
                                    usb_interface_send);
@@ -38,7 +39,7 @@ void protocol_task(void) {
 }
 
 static int32_t usb_interface_send(uint8_t *p_data, uint32_t len) {
-  CDC_Transmit_FS(p_data, len);
+  usb_vcp_tx_write_fifo(p_data, len);
   return 0;
 }
 

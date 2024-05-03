@@ -1,13 +1,14 @@
 #ifndef PROTOCOL_TASK_H_
 #define PROTOCOL_TASK_H_
 
+#include <stdbool.h>
 
 #include "can.h"
-#include "usbd_cdc_if.h"
+// #include "usbd_cdc_if.h"
 #include "timer_task.h"
 #include "init.h"
 #include "protocol.h"
-// #include "usb_vcp_extension.h"
+#include "usb_vcp_extension.h"
 
 #define FIRMWARE_VERSION_0 6u
 #define FIRMWARE_VERSION_1 1u

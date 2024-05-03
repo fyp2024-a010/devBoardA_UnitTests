@@ -1,7 +1,6 @@
 ../protocolTest/application/protocolTest_task.c:14:6:protocol_test_task_init	1
-../protocolTest/application/protocolTest_task.c:22:6:protocol_test_task	4
+../protocolTest/application/protocolTest_task.c:22:6:protocol_test_task	3
 ../protocolTest/application/protocolTest_task.c:43:9:chassis_speed_ctrl	2
-../protocolTest/application/protocolTest_task.c:51:9:chassis_spd_acc_ctrl	2
-../protocolTest/application/protocolTest_task.c:60:9:chassis_push_info	1
-../protocolTest/application/protocolTest_task.c:75:9:report_firmware_version	1
-../protocolTest/application/protocolTest_task.c:79:9:manifold2_heart_package	1
+../protocolTest/application/protocolTest_task.c:59:9:chassis_push_info	1
+../protocolTest/application/protocolTest_task.c:74:9:report_firmware_version	1
+../protocolTest/application/protocolTest_task.c:78:9:manifold2_heart_package	1

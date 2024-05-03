@@ -54,17 +54,7 @@ protocolTest/application/init.o: ../protocolTest/application/init.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../protocolTest/application/blinky_task.h \
  ../protocolTest/application/protocol_task.h ../Core/Inc/can.h \
- ../Core/Inc/main.h ../USB_DEVICE/App/usbd_cdc_if.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../USB_DEVICE/Target/usbd_conf.h \
- ../protocolTest/components/support/mem_mang.h \
- ../protocolTest/components/support/macro_mutex.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
- ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- ../protocolTest/application/protocol/protocol.h \
+ ../Core/Inc/main.h ../protocolTest/application/protocol/protocol.h \
  ../protocolTest/application/protocol/protocol_common.h \
  ../protocolTest/application/protocol/protocol_cfg.h \
  ../protocolTest/components/object/sys.h \
@@ -72,8 +62,20 @@ protocolTest/application/init.o: ../protocolTest/application/init.c \
  ../protocolTest/components/object/rm_errno.h \
  ../protocolTest/components/support/fifo.h \
  ../protocolTest/components/support/linux_list.h \
+ ../protocolTest/components/support/mem_mang.h \
+ ../protocolTest/components/support/macro_mutex.h \
  ../protocolTest/application/protocol/protocol_interface.h \
  ../protocolTest/components/support/macro_mutex.h \
+ ../protocolTest/utilities/usb_vcp_extension.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../USB_DEVICE/Target/usbd_conf.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
+ ../USB_DEVICE/App/usb_device.h \
+ ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../protocolTest/application/protocolTest_task.h
 ../protocolTest/application/init.h:
 ../Core/Inc/main.h:
@@ -133,16 +135,6 @@ protocolTest/application/init.o: ../protocolTest/application/init.c \
 ../protocolTest/application/protocol_task.h:
 ../Core/Inc/can.h:
 ../Core/Inc/main.h:
-../USB_DEVICE/App/usbd_cdc_if.h:
-../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
-../USB_DEVICE/Target/usbd_conf.h:
-../protocolTest/components/support/mem_mang.h:
-../protocolTest/components/support/macro_mutex.h:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
 ../protocolTest/application/protocol/protocol.h:
 ../protocolTest/application/protocol/protocol_common.h:
 ../protocolTest/application/protocol/protocol_cfg.h:
@@ -151,6 +143,18 @@ protocolTest/application/init.o: ../protocolTest/application/init.c \
 ../protocolTest/components/object/rm_errno.h:
 ../protocolTest/components/support/fifo.h:
 ../protocolTest/components/support/linux_list.h:
+../protocolTest/components/support/mem_mang.h:
+../protocolTest/components/support/macro_mutex.h:
 ../protocolTest/application/protocol/protocol_interface.h:
 ../protocolTest/components/support/macro_mutex.h:
+../protocolTest/utilities/usb_vcp_extension.h:
+../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+../USB_DEVICE/Target/usbd_conf.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
+../USB_DEVICE/App/usb_device.h:
+../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 ../protocolTest/application/protocolTest_task.h:

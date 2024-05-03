@@ -67,5 +67,6 @@
 "./protocolTest/components/support/mem_mang4.o"
 "./protocolTest/components/support/mf_crc.o"
 "./protocolTest/utilities/soft_timer.o"
+"./protocolTest/utilities/usb_vcp_extension.o"
 "./protocolTest/utilities/ulog/ulog.o"
 "./protocolTest/utilities/ulog/ulog_console.o"

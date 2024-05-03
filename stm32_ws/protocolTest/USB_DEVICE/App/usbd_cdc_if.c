@@ -22,9 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-#include "fifo.h"
-#include <stdbool.h>
-
+#include "usb_vcp_extension.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,12 +31,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-fifo_s_t usb_tx_fifo;
-uint8_t usb_tx_fifo_buff[APP_TX_DATA_SIZE];
-bool _usb_tx_need_flushing = false;
-void set_usb_tx_need_flushing(bool value);
-int32_t usb_tx_flush(void *argc);
-static usb_vcp_call_back_f usb_vcp_call_back[USB_REC_MAX_NUM];
+
 /* USER CODE END PV */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -102,6 +95,7 @@ uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
 uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
+
 /* USER CODE END PRIVATE_VARIABLES */
 
 /**
@@ -157,7 +151,6 @@ static int8_t CDC_Init_FS(void) {
   /* Set Application Buffers */
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, 0);
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, UserRxBufferFS);
-  fifo_s_init(&usb_tx_fifo, usb_tx_fifo_buff, 4096);
   return (USBD_OK);
   /* USER CODE END 3 */
 }
@@ -263,13 +256,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t *pbuf, uint16_t length) {
  */
 static int8_t CDC_Receive_FS(uint8_t *Buf, uint32_t *Len) {
   /* USER CODE BEGIN 6 */
-  for (int i = 0; i < USB_REC_MAX_NUM; i++) {
-    if (usb_vcp_call_back[i] != NULL) {
-      (*usb_vcp_call_back[i])(Buf, *Len);
-    }
-  }
-  USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
-  USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+  usb_vcp_receive_processing(Buf, Len);
   return (USBD_OK);
   /* USER CODE END 6 */
 }
@@ -288,17 +275,7 @@ static int8_t CDC_Receive_FS(uint8_t *Buf, uint32_t *Len) {
 uint8_t CDC_Transmit_FS(uint8_t *Buf, uint16_t Len) {
   uint8_t result = USBD_OK;
   /* USER CODE BEGIN 7 */
-  // if (Len > 0) {
-  //   fifo_s_puts(&usb_tx_fifo, (char *)Buf, Len);
-  //   set_usb_tx_need_flushing(true);
-  // }
-  USBD_CDC_HandleTypeDef *hcdc =
-      (USBD_CDC_HandleTypeDef *)hUsbDeviceFS.pClassData;
-  if (hcdc->TxState != 0) {
-    return USBD_BUSY;
-  }
-  USBD_CDC_SetTxBuffer(&hUsbDeviceFS, Buf, Len);
-  result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
+  result = usb_vcp_transmit_processing(Buf, Len);
   /* USER CODE END 7 */
   return result;
 }
@@ -319,6 +296,8 @@ uint8_t CDC_Transmit_FS(uint8_t *Buf, uint16_t Len) {
 static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum) {
   uint8_t result = USBD_OK;
   /* USER CODE BEGIN 13 */
+  result = usb_vcp_transmit_callback_processing(Buf, Len);
+
   UNUSED(Buf);
   UNUSED(Len);
   UNUSED(epnum);
@@ -327,56 +306,7 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum) {
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
-void set_usb_tx_need_flushing(bool value) {
-  FIFO_CPU_SR_TYPE cpu_sr =
-      FIFO_GET_CPU_SR(); // todo Change to your own mutex here
-  FIFO_ENTER_CRITICAL();
-  _usb_tx_need_flushing = value;
-  FIFO_RESTORE_CPU_SR(cpu_sr);
-}
 
-int32_t usb_tx_flush(void *argc) {
-  uint8_t result = USBD_OK;
-  USBD_CDC_HandleTypeDef *hcdc =
-      (USBD_CDC_HandleTypeDef *)hUsbDeviceFS.pClassData;
-
-  if (hcdc->TxState != 0) {
-    set_usb_tx_need_flushing(true);
-    return USBD_BUSY;
-  } else {
-    set_usb_tx_need_flushing(false);
-    FIFO_CPU_SR_TYPE cpu_sr;
-    uint32_t send_num;
-    cpu_sr = FIFO_GET_CPU_SR();
-
-    FIFO_ENTER_CRITICAL();
-    send_num = usb_tx_fifo.used_num;
-    fifo_s_gets_noprotect(&usb_tx_fifo, (char *)UserTxBufferFS, send_num);
-    FIFO_RESTORE_CPU_SR(cpu_sr);
-
-    USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, send_num);
-    result = USBD_CDC_TransmitPacket(&hUsbDeviceFS);
-    return result;
-  }
-}
-
-int32_t usb_tx_flush_run(void *argc) {
-  if (_usb_tx_need_flushing) {
-    usb_tx_flush(NULL);
-  }
-}
-
-int32_t usb_vcp_rx_callback_register(usb_vcp_call_back_f fun) {
-
-  for (int i = 0; i < USB_REC_MAX_NUM; i++) {
-    if (usb_vcp_call_back[i] == NULL) {
-      usb_vcp_call_back[i] = fun;
-      return USBD_OK;
-    }
-  }
-
-  return USBD_FAIL;
-}
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**

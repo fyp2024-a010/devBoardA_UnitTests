@@ -1,5 +1,5 @@
 ../protocolTest/application/protocol_task.c:9:6:protocol_task_init	1
-../protocolTest/application/protocol_task.c:20:6:protocol_task	4
-../protocolTest/application/protocol_task.c:40:16:usb_interface_send	1
-../protocolTest/application/protocol_task.c:45:13:protocol_send_success_callback	1
-../protocolTest/application/protocol_task.c:49:16:usb_rcv_callback	1
+../protocolTest/application/protocol_task.c:21:6:protocol_task	4
+../protocolTest/application/protocol_task.c:41:16:usb_interface_send	1
+../protocolTest/application/protocol_task.c:46:13:protocol_send_success_callback	1
+../protocolTest/application/protocol_task.c:50:16:usb_rcv_callback	1

@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../protocolTest/utilities/soft_timer.c 
+../protocolTest/utilities/soft_timer.c \
+../protocolTest/utilities/usb_vcp_extension.c 
 
 OBJS += \
-./protocolTest/utilities/soft_timer.o 
+./protocolTest/utilities/soft_timer.o \
+./protocolTest/utilities/usb_vcp_extension.o 
 
 C_DEPS += \
-./protocolTest/utilities/soft_timer.d 
+./protocolTest/utilities/soft_timer.d \
+./protocolTest/utilities/usb_vcp_extension.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ protocolTest/utilities/%.o protocolTest/utilities/%.su protocolTest/utilities/%.
 clean: clean-protocolTest-2f-utilities
 
 clean-protocolTest-2f-utilities:
-	-$(RM) ./protocolTest/utilities/soft_timer.cyclo ./protocolTest/utilities/soft_timer.d ./protocolTest/utilities/soft_timer.o ./protocolTest/utilities/soft_timer.su
+	-$(RM) ./protocolTest/utilities/soft_timer.cyclo ./protocolTest/utilities/soft_timer.d ./protocolTest/utilities/soft_timer.o ./protocolTest/utilities/soft_timer.su ./protocolTest/utilities/usb_vcp_extension.cyclo ./protocolTest/utilities/usb_vcp_extension.d ./protocolTest/utilities/usb_vcp_extension.o ./protocolTest/utilities/usb_vcp_extension.su
 
 .PHONY: clean-protocolTest-2f-utilities
 
