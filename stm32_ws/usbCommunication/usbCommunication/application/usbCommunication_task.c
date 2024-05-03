@@ -1,7 +1,12 @@
 #include "usbCommunication_task.h"
 #include <stdint.h>
 
-uint8_t test_fifo = 0;
+uint8_t test_fifo = 1;
+
+int32_t test_int32;
+
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian);
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian);
 
 uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian) {
   // Converts an int32_t value to a byte array.
@@ -16,6 +21,7 @@ uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian) {
     bytes[2] = (value >> 16) & 0xFF;
     bytes[3] = (value >> 24) & 0xFF;
   }
+  test_int32 = bytes_to_int32(bytes, 0);
 
   return 4; // Number of bytes written
 }
