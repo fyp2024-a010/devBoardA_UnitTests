@@ -9465,14 +9465,14 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x000000000800c0ee       0x70 ./usbCommunication/application/usbCommunication_task.o
                 0x000000000800c0ee                bytes_to_int32
  *fill*         0x000000000800c15e        0x2 
- .text.usb_rcv_callback
-                0x000000000800c160       0x38 ./usbCommunication/application/usbCommunication_task.o
  .text.usb_send
-                0x000000000800c198       0x44 ./usbCommunication/application/usbCommunication_task.o
-                0x000000000800c198                usb_send
+                0x000000000800c160       0x44 ./usbCommunication/application/usbCommunication_task.o
+                0x000000000800c160                usb_send
+ .text.usb_rcv_callback
+                0x000000000800c1a4       0x3c ./usbCommunication/application/usbCommunication_task.o
  .text.usbComm_task
-                0x000000000800c1dc       0x34 ./usbCommunication/application/usbCommunication_task.o
-                0x000000000800c1dc                usbComm_task
+                0x000000000800c1e0       0x30 ./usbCommunication/application/usbCommunication_task.o
+                0x000000000800c1e0                usbComm_task
  .text.fifo_s_init
                 0x000000000800c210       0x44 ./usbCommunication/components/support/fifo.o
                 0x000000000800c210                fifo_s_init
@@ -10076,7 +10076,7 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .comment       0x0000000000000043       0x44 ./usbCommunication/components/utilities/soft_timer.o
  .comment       0x0000000000000043       0x44 ./usbCommunication/components/utilities/usb_vcp_extension.o
 
-.debug_info     0x0000000000000000    0x23e6b
+.debug_info     0x0000000000000000    0x23e45
  .debug_info    0x0000000000000000      0xb84 ./Core/Src/can.o
  .debug_info    0x0000000000000b84      0x4ef ./Core/Src/dma.o
  .debug_info    0x0000000000001073      0x2e4 ./Core/Src/freertos.o
@@ -10119,12 +10119,12 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_info    0x0000000000021518      0x2c9 ./usbCommunication/application/blinky_task.o
  .debug_info    0x00000000000217e1      0x28f ./usbCommunication/application/init.o
  .debug_info    0x0000000000021a70      0x2eb ./usbCommunication/application/timer_task.o
- .debug_info    0x0000000000021d5b      0x3c5 ./usbCommunication/application/usbCommunication_task.o
- .debug_info    0x0000000000022120      0xde7 ./usbCommunication/components/support/fifo.o
- .debug_info    0x0000000000022f07      0x38f ./usbCommunication/components/utilities/soft_timer.o
- .debug_info    0x0000000000023296      0xbd5 ./usbCommunication/components/utilities/usb_vcp_extension.o
+ .debug_info    0x0000000000021d5b      0x39f ./usbCommunication/application/usbCommunication_task.o
+ .debug_info    0x00000000000220fa      0xde7 ./usbCommunication/components/support/fifo.o
+ .debug_info    0x0000000000022ee1      0x38f ./usbCommunication/components/utilities/soft_timer.o
+ .debug_info    0x0000000000023270      0xbd5 ./usbCommunication/components/utilities/usb_vcp_extension.o
 
-.debug_abbrev   0x0000000000000000     0x6347
+.debug_abbrev   0x0000000000000000     0x6333
  .debug_abbrev  0x0000000000000000      0x225 ./Core/Src/can.o
  .debug_abbrev  0x0000000000000225      0x10e ./Core/Src/dma.o
  .debug_abbrev  0x0000000000000333      0x185 ./Core/Src/freertos.o
@@ -10167,10 +10167,10 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_abbrev  0x000000000000554b      0x1a7 ./usbCommunication/application/blinky_task.o
  .debug_abbrev  0x00000000000056f2      0x162 ./usbCommunication/application/init.o
  .debug_abbrev  0x0000000000005854      0x1ad ./usbCommunication/application/timer_task.o
- .debug_abbrev  0x0000000000005a01      0x1be ./usbCommunication/application/usbCommunication_task.o
- .debug_abbrev  0x0000000000005bbf      0x2d7 ./usbCommunication/components/support/fifo.o
- .debug_abbrev  0x0000000000005e96      0x1ad ./usbCommunication/components/utilities/soft_timer.o
- .debug_abbrev  0x0000000000006043      0x304 ./usbCommunication/components/utilities/usb_vcp_extension.o
+ .debug_abbrev  0x0000000000005a01      0x1aa ./usbCommunication/application/usbCommunication_task.o
+ .debug_abbrev  0x0000000000005bab      0x2d7 ./usbCommunication/components/support/fifo.o
+ .debug_abbrev  0x0000000000005e82      0x1ad ./usbCommunication/components/utilities/soft_timer.o
+ .debug_abbrev  0x000000000000602f      0x304 ./usbCommunication/components/utilities/usb_vcp_extension.o
 
 .debug_aranges  0x0000000000000000     0x1f10
  .debug_aranges
@@ -10522,7 +10522,7 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_macro   0x000000000002b1f8      0x494 ./usbCommunication/components/utilities/usb_vcp_extension.o
  .debug_macro   0x000000000002b68c       0x10 ./usbCommunication/components/utilities/usb_vcp_extension.o
 
-.debug_line     0x0000000000000000    0x29820
+.debug_line     0x0000000000000000    0x29814
  .debug_line    0x0000000000000000      0x86c ./Core/Src/can.o
  .debug_line    0x000000000000086c      0x756 ./Core/Src/dma.o
  .debug_line    0x0000000000000fc2      0xa4c ./Core/Src/freertos.o
@@ -10565,10 +10565,10 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_line    0x0000000000023e2c      0xae3 ./usbCommunication/application/blinky_task.o
  .debug_line    0x000000000002490f      0xcaa ./usbCommunication/application/init.o
  .debug_line    0x00000000000255b9      0xae6 ./usbCommunication/application/timer_task.o
- .debug_line    0x000000000002609f      0xd73 ./usbCommunication/application/usbCommunication_task.o
- .debug_line    0x0000000000026e12     0x12a2 ./usbCommunication/components/support/fifo.o
- .debug_line    0x00000000000280b4      0x976 ./usbCommunication/components/utilities/soft_timer.o
- .debug_line    0x0000000000028a2a      0xdf6 ./usbCommunication/components/utilities/usb_vcp_extension.o
+ .debug_line    0x000000000002609f      0xd67 ./usbCommunication/application/usbCommunication_task.o
+ .debug_line    0x0000000000026e06     0x12a2 ./usbCommunication/components/support/fifo.o
+ .debug_line    0x00000000000280a8      0x976 ./usbCommunication/components/utilities/soft_timer.o
+ .debug_line    0x0000000000028a1e      0xdf6 ./usbCommunication/components/utilities/usb_vcp_extension.o
 
 .debug_str      0x0000000000000000    0xe9c2e
  .debug_str     0x0000000000000000    0xd5d30 ./Core/Src/can.o

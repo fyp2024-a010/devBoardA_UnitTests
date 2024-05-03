@@ -37,16 +37,6 @@ int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian) {
   return value;
 }
 
-static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
-  if (test_fifo == 1) {
-    int32_t rx_data = bytes_to_int32(buf, 0);
-    return rx_data;
-  } else {
-    int32_t rx_data = bytes_to_int32(buf, 0);
-    return rx_data;
-  }
-}
-
 void usb_send(int32_t data) {
   uint8_t buf[4];
   int32_to_bytes(data, buf, 0);
@@ -57,13 +47,24 @@ void usb_send(int32_t data) {
   }
 }
 
+static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
+	int32_t rx_data;
+  if (test_fifo == 1) {
+    rx_data = bytes_to_int32(buf, 0);
+  } else {
+    rx_data = bytes_to_int32(buf, 0);
+  }
+  usb_send(rx_data);
+  return rx_data;
+}
+
 void usbComm_task(void const *argument) {
   usb_vcp_init(true);
   usb_vcp_rx_callback_register(usb_rcv_callback);
   soft_timer_register(usb_tx_flush_run, NULL, 1);
 
   for (;;) {
-    usb_send(32);
+//    usb_send(32);
     osDelay(1);
   }
 }

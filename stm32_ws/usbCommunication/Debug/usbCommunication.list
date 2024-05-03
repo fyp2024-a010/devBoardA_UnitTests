@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00020180  2**0
                   CONTENTS, READONLY
- 14 .debug_info   00023e6b  00000000  00000000  000201c3  2**0
+ 14 .debug_info   00023e45  00000000  00000000  000201c3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00006347  00000000  00000000  0004402e  2**0
+ 15 .debug_abbrev 00006333  00000000  00000000  00044008  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00001f10  00000000  00000000  0004a378  2**3
+ 16 .debug_aranges 00001f10  00000000  00000000  0004a340  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 000017ad  00000000  00000000  0004c288  2**0
+ 17 .debug_rnglists 000017ad  00000000  00000000  0004c250  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0002b69c  00000000  00000000  0004da35  2**0
+ 18 .debug_macro  0002b69c  00000000  00000000  0004d9fd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00029820  00000000  00000000  000790d1  2**0
+ 19 .debug_line   00029814  00000000  00000000  00079099  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000e9c2e  00000000  00000000  000a28f1  2**0
+ 20 .debug_str    000e9c2e  00000000  00000000  000a28ad  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00008224  00000000  00000000  0018c520  2**2
+ 21 .debug_frame  00008224  00000000  00000000  0018c4dc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000089  00000000  00000000  00194744  2**0
+ 22 .debug_line_str 00000089  00000000  00000000  00194700  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -33505,113 +33505,113 @@ int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian) {
  800c15c:	4770      	bx	lr
 	...
 
-0800c160 <usb_rcv_callback>:
+0800c160 <usb_send>:
 
-static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
+void usb_send(int32_t data) {
  800c160:	b580      	push	{r7, lr}
  800c162:	b084      	sub	sp, #16
  800c164:	af00      	add	r7, sp, #0
  800c166:	6078      	str	r0, [r7, #4]
- 800c168:	6039      	str	r1, [r7, #0]
-  if (test_fifo == 1) {
- 800c16a:	4b0a      	ldr	r3, [pc, #40]	; (800c194 <usb_rcv_callback+0x34>)
- 800c16c:	781b      	ldrb	r3, [r3, #0]
- 800c16e:	2b01      	cmp	r3, #1
- 800c170:	d106      	bne.n	800c180 <usb_rcv_callback+0x20>
-    int32_t rx_data = bytes_to_int32(buf, 0);
- 800c172:	2100      	movs	r1, #0
- 800c174:	6878      	ldr	r0, [r7, #4]
- 800c176:	f7ff ffba 	bl	800c0ee <bytes_to_int32>
- 800c17a:	60b8      	str	r0, [r7, #8]
-    return rx_data;
- 800c17c:	68bb      	ldr	r3, [r7, #8]
- 800c17e:	e005      	b.n	800c18c <usb_rcv_callback+0x2c>
-  } else {
-    int32_t rx_data = bytes_to_int32(buf, 0);
- 800c180:	2100      	movs	r1, #0
- 800c182:	6878      	ldr	r0, [r7, #4]
- 800c184:	f7ff ffb3 	bl	800c0ee <bytes_to_int32>
- 800c188:	60f8      	str	r0, [r7, #12]
-    return rx_data;
- 800c18a:	68fb      	ldr	r3, [r7, #12]
-  }
-}
- 800c18c:	4618      	mov	r0, r3
- 800c18e:	3710      	adds	r7, #16
- 800c190:	46bd      	mov	sp, r7
- 800c192:	bd80      	pop	{r7, pc}
- 800c194:	2001134c 	.word	0x2001134c
-
-0800c198 <usb_send>:
-
-void usb_send(int32_t data) {
- 800c198:	b580      	push	{r7, lr}
- 800c19a:	b084      	sub	sp, #16
- 800c19c:	af00      	add	r7, sp, #0
- 800c19e:	6078      	str	r0, [r7, #4]
   uint8_t buf[4];
   int32_to_bytes(data, buf, 0);
- 800c1a0:	f107 030c 	add.w	r3, r7, #12
- 800c1a4:	2200      	movs	r2, #0
- 800c1a6:	4619      	mov	r1, r3
- 800c1a8:	6878      	ldr	r0, [r7, #4]
- 800c1aa:	f7ff ff61 	bl	800c070 <int32_to_bytes>
+ 800c168:	f107 030c 	add.w	r3, r7, #12
+ 800c16c:	2200      	movs	r2, #0
+ 800c16e:	4619      	mov	r1, r3
+ 800c170:	6878      	ldr	r0, [r7, #4]
+ 800c172:	f7ff ff7d 	bl	800c070 <int32_to_bytes>
   if (test_fifo == 1) {
- 800c1ae:	4b0a      	ldr	r3, [pc, #40]	; (800c1d8 <usb_send+0x40>)
- 800c1b0:	781b      	ldrb	r3, [r3, #0]
- 800c1b2:	2b01      	cmp	r3, #1
- 800c1b4:	d106      	bne.n	800c1c4 <usb_send+0x2c>
+ 800c176:	4b0a      	ldr	r3, [pc, #40]	; (800c1a0 <usb_send+0x40>)
+ 800c178:	781b      	ldrb	r3, [r3, #0]
+ 800c17a:	2b01      	cmp	r3, #1
+ 800c17c:	d106      	bne.n	800c18c <usb_send+0x2c>
     usb_vcp_tx_write_fifo(buf, sizeof(buf));
- 800c1b6:	f107 030c 	add.w	r3, r7, #12
- 800c1ba:	2104      	movs	r1, #4
- 800c1bc:	4618      	mov	r0, r3
- 800c1be:	f000 faab 	bl	800c718 <usb_vcp_tx_write_fifo>
+ 800c17e:	f107 030c 	add.w	r3, r7, #12
+ 800c182:	2104      	movs	r1, #4
+ 800c184:	4618      	mov	r0, r3
+ 800c186:	f000 fac7 	bl	800c718 <usb_vcp_tx_write_fifo>
   } else {
     transmit_processing_stm32_default(buf, sizeof(buf));
   }
 }
- 800c1c2:	e005      	b.n	800c1d0 <usb_send+0x38>
+ 800c18a:	e005      	b.n	800c198 <usb_send+0x38>
     transmit_processing_stm32_default(buf, sizeof(buf));
- 800c1c4:	f107 030c 	add.w	r3, r7, #12
- 800c1c8:	2104      	movs	r1, #4
- 800c1ca:	4618      	mov	r0, r3
- 800c1cc:	f000 fa7e 	bl	800c6cc <transmit_processing_stm32_default>
+ 800c18c:	f107 030c 	add.w	r3, r7, #12
+ 800c190:	2104      	movs	r1, #4
+ 800c192:	4618      	mov	r0, r3
+ 800c194:	f000 fa9a 	bl	800c6cc <transmit_processing_stm32_default>
 }
- 800c1d0:	bf00      	nop
- 800c1d2:	3710      	adds	r7, #16
- 800c1d4:	46bd      	mov	sp, r7
- 800c1d6:	bd80      	pop	{r7, pc}
- 800c1d8:	2001134c 	.word	0x2001134c
+ 800c198:	bf00      	nop
+ 800c19a:	3710      	adds	r7, #16
+ 800c19c:	46bd      	mov	sp, r7
+ 800c19e:	bd80      	pop	{r7, pc}
+ 800c1a0:	2001134c 	.word	0x2001134c
 
-0800c1dc <usbComm_task>:
+0800c1a4 <usb_rcv_callback>:
+
+static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
+ 800c1a4:	b580      	push	{r7, lr}
+ 800c1a6:	b084      	sub	sp, #16
+ 800c1a8:	af00      	add	r7, sp, #0
+ 800c1aa:	6078      	str	r0, [r7, #4]
+ 800c1ac:	6039      	str	r1, [r7, #0]
+	int32_t rx_data;
+  if (test_fifo == 1) {
+ 800c1ae:	4b0b      	ldr	r3, [pc, #44]	; (800c1dc <usb_rcv_callback+0x38>)
+ 800c1b0:	781b      	ldrb	r3, [r3, #0]
+ 800c1b2:	2b01      	cmp	r3, #1
+ 800c1b4:	d105      	bne.n	800c1c2 <usb_rcv_callback+0x1e>
+    rx_data = bytes_to_int32(buf, 0);
+ 800c1b6:	2100      	movs	r1, #0
+ 800c1b8:	6878      	ldr	r0, [r7, #4]
+ 800c1ba:	f7ff ff98 	bl	800c0ee <bytes_to_int32>
+ 800c1be:	60f8      	str	r0, [r7, #12]
+ 800c1c0:	e004      	b.n	800c1cc <usb_rcv_callback+0x28>
+  } else {
+    rx_data = bytes_to_int32(buf, 0);
+ 800c1c2:	2100      	movs	r1, #0
+ 800c1c4:	6878      	ldr	r0, [r7, #4]
+ 800c1c6:	f7ff ff92 	bl	800c0ee <bytes_to_int32>
+ 800c1ca:	60f8      	str	r0, [r7, #12]
+  }
+  usb_send(rx_data);
+ 800c1cc:	68f8      	ldr	r0, [r7, #12]
+ 800c1ce:	f7ff ffc7 	bl	800c160 <usb_send>
+  return rx_data;
+ 800c1d2:	68fb      	ldr	r3, [r7, #12]
+}
+ 800c1d4:	4618      	mov	r0, r3
+ 800c1d6:	3710      	adds	r7, #16
+ 800c1d8:	46bd      	mov	sp, r7
+ 800c1da:	bd80      	pop	{r7, pc}
+ 800c1dc:	2001134c 	.word	0x2001134c
+
+0800c1e0 <usbComm_task>:
 
 void usbComm_task(void const *argument) {
- 800c1dc:	b580      	push	{r7, lr}
- 800c1de:	b082      	sub	sp, #8
- 800c1e0:	af00      	add	r7, sp, #0
- 800c1e2:	6078      	str	r0, [r7, #4]
+ 800c1e0:	b580      	push	{r7, lr}
+ 800c1e2:	b082      	sub	sp, #8
+ 800c1e4:	af00      	add	r7, sp, #0
+ 800c1e6:	6078      	str	r0, [r7, #4]
   usb_vcp_init(true);
- 800c1e4:	2001      	movs	r0, #1
- 800c1e6:	f000 fa09 	bl	800c5fc <usb_vcp_init>
+ 800c1e8:	2001      	movs	r0, #1
+ 800c1ea:	f000 fa07 	bl	800c5fc <usb_vcp_init>
   usb_vcp_rx_callback_register(usb_rcv_callback);
- 800c1ea:	4807      	ldr	r0, [pc, #28]	; (800c208 <usbComm_task+0x2c>)
- 800c1ec:	f000 faae 	bl	800c74c <usb_vcp_rx_callback_register>
+ 800c1ee:	4806      	ldr	r0, [pc, #24]	; (800c208 <usbComm_task+0x28>)
+ 800c1f0:	f000 faac 	bl	800c74c <usb_vcp_rx_callback_register>
   soft_timer_register(usb_tx_flush_run, NULL, 1);
- 800c1f0:	2201      	movs	r2, #1
- 800c1f2:	2100      	movs	r1, #0
- 800c1f4:	4805      	ldr	r0, [pc, #20]	; (800c20c <usbComm_task+0x30>)
- 800c1f6:	f7ff fefb 	bl	800bff0 <soft_timer_register>
+ 800c1f4:	2201      	movs	r2, #1
+ 800c1f6:	2100      	movs	r1, #0
+ 800c1f8:	4804      	ldr	r0, [pc, #16]	; (800c20c <usbComm_task+0x2c>)
+ 800c1fa:	f7ff fef9 	bl	800bff0 <soft_timer_register>
 
   for (;;) {
-    usb_send(32);
- 800c1fa:	2020      	movs	r0, #32
- 800c1fc:	f7ff ffcc 	bl	800c198 <usb_send>
+//    usb_send(32);
     osDelay(1);
- 800c200:	2001      	movs	r0, #1
- 800c202:	f7fd fe51 	bl	8009ea8 <osDelay>
-    usb_send(32);
- 800c206:	e7f8      	b.n	800c1fa <usbComm_task+0x1e>
- 800c208:	0800c161 	.word	0x0800c161
+ 800c1fe:	2001      	movs	r0, #1
+ 800c200:	f7fd fe52 	bl	8009ea8 <osDelay>
+ 800c204:	e7fb      	b.n	800c1fe <usbComm_task+0x1e>
+ 800c206:	bf00      	nop
+ 800c208:	0800c1a5 	.word	0x0800c1a5
  800c20c:	0800c851 	.word	0x0800c851
 
 0800c210 <fifo_s_init>:
