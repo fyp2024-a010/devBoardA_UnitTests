@@ -1,5 +1,0 @@
-../usbCommunication/application/infantry_cmd.c:44:22:get_manifold_cmd	1
-../usbCommunication/application/infantry_cmd.c:69:6:infantry_cmd_task	4
-../usbCommunication/application/infantry_cmd.c:189:9:chassis_speed_ctrl	2
-../usbCommunication/application/infantry_cmd.c:199:9:chassis_spd_acc_ctrl	2
-../usbCommunication/application/infantry_cmd.c:271:9:chassis_push_info	1
