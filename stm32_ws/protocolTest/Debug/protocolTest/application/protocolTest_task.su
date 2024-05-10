@@ -1,6 +1,0 @@
-../protocolTest/application/protocolTest_task.c:14:6:protocol_test_task_init	8	static
-../protocolTest/application/protocolTest_task.c:22:6:protocol_test_task	24	static
-../protocolTest/application/protocolTest_task.c:43:9:chassis_speed_ctrl	16	static
-../protocolTest/application/protocolTest_task.c:59:9:chassis_push_info	16	static
-../protocolTest/application/protocolTest_task.c:74:9:report_firmware_version	16	static
-../protocolTest/application/protocolTest_task.c:78:9:manifold2_heart_package	16	static
