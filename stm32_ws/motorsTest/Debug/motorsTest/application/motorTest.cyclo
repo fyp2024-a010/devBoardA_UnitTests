@@ -1,7 +1,0 @@
-../motorsTest/application/motorTest.c:12:6:can_filter_init	4
-../motorsTest/application/motorTest.c:44:6:encoder_data_handler	3
-../motorsTest/application/motorTest.c:71:6:can_receive_msg	6
-../motorsTest/application/motorTest.c:99:6:HAL_CAN_RxFifo0MsgPendingCallback	1
-../motorsTest/application/motorTest.c:112:6:motor_send_bytes	1
-../motorsTest/application/motorTest.c:133:6:can_send_msg	2
-../motorsTest/application/motorTest.c:159:6:motor_test	1
