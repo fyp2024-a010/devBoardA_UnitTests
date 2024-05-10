@@ -1,9 +1,0 @@
-../usbCommunication/boards/drv_can.c:27:6:can_manage_init	56	static
-../usbCommunication/boards/drv_can.c:66:10:can_msg_bytes_send	88	static
-../usbCommunication/boards/drv_can.c:137:9:can_fifo0_rx_callback_register	24	static
-../usbCommunication/boards/drv_can.c:149:13:can_tx_mailbox_complete_hanle	80	static,ignoring_inline_asm
-../usbCommunication/boards/drv_can.c:191:6:HAL_CAN_TxMailbox0CompleteCallback	16	static
-../usbCommunication/boards/drv_can.c:199:6:HAL_CAN_TxMailbox1CompleteCallback	16	static
-../usbCommunication/boards/drv_can.c:206:6:HAL_CAN_TxMailbox2CompleteCallback	16	static
-../usbCommunication/boards/drv_can.c:214:6:HAL_CAN_ErrorCallback	16	static
-../usbCommunication/boards/drv_can.c:223:6:HAL_CAN_RxFifo0MsgPendingCallback	56	static

@@ -1,6 +1,0 @@
-../usbCommunication/components/utilities/soft_timer.c:82:6:TimerISR_Hook	16	static
-../usbCommunication/components/utilities/soft_timer.c:105:10:soft_timer_init	16	static
-../usbCommunication/components/utilities/soft_timer.c:117:10:soft_timer_destory	16	static
-../usbCommunication/components/utilities/soft_timer.c:143:10:soft_timer_req	32	static,ignoring_inline_asm
-../usbCommunication/components/utilities/soft_timer.c:173:10:soft_timer_update	32	static,ignoring_inline_asm
-../usbCommunication/components/utilities/soft_timer.c:209:10:soft_timer_check	32	static,ignoring_inline_asm

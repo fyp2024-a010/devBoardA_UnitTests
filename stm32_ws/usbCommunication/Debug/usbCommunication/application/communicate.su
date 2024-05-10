@@ -1,6 +1,0 @@
-../usbCommunication/application/communicate.c:65:16:usb_rcv_callback	16	static
-../usbCommunication/application/communicate.c:89:9:manifold2_heart_package	16	static
-../usbCommunication/application/communicate.c:94:9:report_firmware_version	16	static
-../usbCommunication/application/communicate.c:99:6:communicate_task	40	static
-../usbCommunication/application/communicate.c:157:16:usb_interface_send	16	static
-../usbCommunication/application/communicate.c:163:13:protocol_send_success_callback	8	static

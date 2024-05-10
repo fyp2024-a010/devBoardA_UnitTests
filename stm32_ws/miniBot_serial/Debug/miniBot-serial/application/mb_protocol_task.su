@@ -1,3 +1,0 @@
-../miniBot-serial/application/mb_protocol_task.c:7:6:usb_send	24	static
-../miniBot-serial/application/mb_protocol_task.c:14:16:usb_rcv_callback	16	static
-../miniBot-serial/application/mb_protocol_task.c:24:6:mb_protocol_task	16	static
