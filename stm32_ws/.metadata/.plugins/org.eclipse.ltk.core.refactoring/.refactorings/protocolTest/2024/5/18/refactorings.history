@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;protocolTest/protocolTest/components/object/errno.h&apos; to &apos;rm_errno.h&apos;" description="Rename resource &apos;errno.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="protocolTest/components/object/errno.h" name="rm_errno.h" stamp="1714630861885" updateReferences="true"/>
+</session>

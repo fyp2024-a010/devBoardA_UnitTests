@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="protocol_uart_interface_register"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="protocol_uart_interface_register"/>
+			<item value="USBD_LL_Transmit"/>
+			<item value="motor_can_send"/>
+			<item value="motor_canstd_send"/>
+			<item value="motor_send_flag"/>
+			<item value="can1_motor_msg_rec"/>
+			<item value="power"/>
+			<item value="chassis_speed_ctrl"/>
+			<item value="can2"/>
+			<item value="SYS"/>
+			<item value="ref_get_crc8"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1010"/>
+		<item key="DIALOG_Y_ORIGIN" value="324"/>
+		<item key="DIALOG_WIDTH" value="336"/>
+		<item key="DIALOG_HEIGHT" value="402"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>

@@ -1,0 +1,105 @@
+#include "motor_task.h"
+#include "timer_task.h"
+
+#include "can.h"
+#include "drv_can.h"
+#include "errno.h" // for RM_OK
+#include "motor_cluster.h"
+#include <stdint.h>
+
+// source: init.c
+struct motor_cluster motor_cluster;
+// source: infantry_cmd_task
+struct motor_cluster_info cmd_motor_cluster_info;
+
+// soft timer callback
+// source: board.c
+int32_t motor_can1_output_1ms(void *argc) {
+  motor_device_can_output(DEVICE_CAN1); // from motor.c
+  return 0;
+}
+
+/// sends the can message
+int32_t motor_canstd_send(struct can_msg msg) {
+  int16_t current = 1000;
+  struct can_msg msg1;
+  msg1.data[0] = current >> 8;
+  msg1.data[1] = current;
+  msg1.data[2] = current >> 8;
+  msg1.data[3] = current;
+  msg1.data[4] = current >> 8;
+  msg1.data[5] = current;
+  msg1.data[6] = current >> 8;
+  msg1.data[7] = current;
+  uint8_t data[8];
+  data[0] = current >> 8;
+  data[1] = current;
+  data[2] = current >> 8;
+  data[3] = current;
+  data[4] = current >> 8;
+  data[5] = current;
+  data[6] = current >> 8;
+  data[7] = current;
+  // can_msg_bytes_send(&hcan1, msg.data, 8, msg.id);
+  // can_msg_bytes_send(&hcan1, msg1.data, 8, msg1.id);
+  can_msg_bytes_send(&hcan1, data, 8, 0x200);
+  return RM_OK;
+}
+
+/// receives the can message
+int32_t can1_motor_msg_rec(CAN_RxHeaderTypeDef *header, uint8_t *data) {
+  motor_device_data_update(DEVICE_CAN1, header->StdId, data); // from motor.c
+  return RM_OK;
+}
+
+void motor_task_init(void) {
+  // Enable the motors
+  HAL_GPIO_WritePin(POWER1_CTRL_GPIO_Port, POWER1_CTRL_Pin, SET);
+  HAL_GPIO_WritePin(POWER2_CTRL_GPIO_Port, POWER2_CTRL_Pin, SET);
+  HAL_GPIO_WritePin(POWER3_CTRL_GPIO_Port, POWER3_CTRL_Pin, SET);
+  HAL_GPIO_WritePin(POWER4_CTRL_GPIO_Port, POWER4_CTRL_Pin, SET);
+
+  // board.c -> board_config()
+  soft_timer_init();
+  can_manage_init();
+  soft_timer_register(motor_can1_output_1ms, NULL, 1);
+
+  motor_device_can_send_register(motor_canstd_send); // from motor.c
+  can_fifo0_rx_callback_register(&can1_manage,
+                                 can1_motor_msg_rec); // from drv_can.c
+
+  // init.c
+  motor_cluster_pid_register(&motor_cluster, "motor_cluster",
+                             DEVICE_CAN1); // from motor_cluster.c
+  motor_cluster_disable(&motor_cluster);   // from motor_cluster.c
+}
+
+int32_t motor_cluster_push_info(void *argc) {
+  struct motor_cluster_info info;
+  motor_cluster_t pmotor_cluster = (motor_cluster_t)argc;
+  motor_cluster_get_info(pmotor_cluster, &info);
+
+  cmd_motor_cluster_info.wheel_rpm[0] = info.wheel_rpm[0];
+  cmd_motor_cluster_info.wheel_rpm[1] = info.wheel_rpm[1];
+  cmd_motor_cluster_info.wheel_rpm[2] = info.wheel_rpm[2];
+  cmd_motor_cluster_info.wheel_rpm[3] = info.wheel_rpm[3];
+
+  return 0;
+}
+
+// source: chassis_task
+void motor_task(void const *argument) {
+  uint32_t period = osKernelSysTick();
+  motor_cluster_t pmotor_cluster = NULL;
+  pmotor_cluster = motor_cluster_find("motor_cluster");
+
+  soft_timer_register(motor_cluster_push_info, (void *)pmotor_cluster, 10);
+
+  for (;;) {
+
+    motor_cluster_set_rpm(pmotor_cluster, 500, 500, 500, 500);
+
+    motor_cluster_execute(pmotor_cluster);
+    osDelayUntil(&period, 2);
+  }
+}

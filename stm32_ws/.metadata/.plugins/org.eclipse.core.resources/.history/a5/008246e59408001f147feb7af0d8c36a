@@ -1,0 +1,14 @@
+#ifndef INIT_H_
+#define INIT_H_
+
+#include "can.h"
+#include "main.h"
+
+#include "blinky_task.h"
+#include "timer_task.h"
+#include "usbCommunication_task.h"
+
+void hw_init();
+void task_init();
+
+#endif /* INIT_H_ */

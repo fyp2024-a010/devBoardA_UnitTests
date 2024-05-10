@@ -1,0 +1,27 @@
+#ifndef __USB_VCP_EXTENSION_H_
+#define __USB_VCP_EXTENSION_H_
+
+#include "usbd_cdc.h"
+#include "usb_device.h"
+#include "fifo.h"
+#include <stdbool.h>
+
+#define USB_REC_MAX_NUM 5
+
+extern USBD_HandleTypeDef hUsbDeviceFS;
+extern uint8_t UserTxBufferFS[];
+
+typedef int32_t(*usb_vcp_call_back_f)(uint8_t *buf, uint32_t len);
+int32_t usb_vcp_rx_callback_register(usb_vcp_call_back_f fun);
+
+void usb_vcp_init(void);
+void set_usb_tx_need_flushing(bool value);
+void usb_vcp_receive_processing(uint8_t* Buf, uint32_t *Len);
+uint8_t usb_vcp_transmit_processing(uint8_t* Buf, uint16_t Len);
+
+int32_t usb_tx_flush(void* argc);
+void usb_tx_flush_processing(void *argc);
+
+
+#endif /* __USB_VCP_EXTENSION_H_ */
+

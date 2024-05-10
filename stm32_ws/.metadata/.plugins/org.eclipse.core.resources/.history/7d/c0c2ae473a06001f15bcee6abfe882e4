@@ -1,0 +1,182 @@
+#include "motor_cluster.h"
+
+static int32_t motor_pid_input_convert(struct controller *ctrl, void *input);
+
+/// @brief Registers a motor cluster (motors + controllers) to the system
+/// @param motor_cluster The motor cluster structure to register
+/// @param name The name of the motor cluster
+/// @param can The CAN bus to use
+/// @return RM_OK if the motor cluster is registered successfully
+int32_t motor_cluster_pid_register(struct motor_cluster *motor_cluster,
+                                   const char *name, enum device_can can) {
+  char motor_name[4][OBJECT_NAME_MAX_LEN] = {0};
+  uint8_t name_len;
+
+  int32_t err;
+
+  // finds the motor cluster
+  if (motor_cluster == NULL)
+    return -RM_INVAL;
+  if (motor_cluster_find(name) != NULL)
+    return -RM_EXISTED;
+
+  object_init(&(motor_cluster->parent), Object_Class_Chassis, name);
+
+  name_len = strlen(name);
+
+  if (name_len > OBJECT_NAME_MAX_LEN / 2) {
+    name_len = OBJECT_NAME_MAX_LEN / 2;
+  }
+
+  // initializes the motor cluster (motors and controllers)
+  for (int i = 0; i < 4; i++) {
+    memcpy(&motor_name[i], name, name_len);
+    motor_cluster->motor[i].can_periph = can;
+    motor_cluster->motor[i].can_id = 0x201 + i;
+    motor_cluster->motor[i].init_offset_f = 1;
+
+    motor_cluster->ctrl[i].convert_feedback = motor_pid_input_convert;
+    pid_struct_init(&motor_cluster->motor_pid[i], 15000, 500, 6.5f, 0.1, 0);
+  }
+
+  // names the motors
+  memcpy(&motor_name[0][name_len], "_FR\0", 4);
+  memcpy(&motor_name[1][name_len], "_FL\0", 4);
+  memcpy(&motor_name[2][name_len], "_BL\0", 4);
+  memcpy(&motor_name[3][name_len], "_BR\0", 4);
+
+  // registers the motors
+  for (int i = 0; i < 4; i++) {
+    err = motor_device_register(&(motor_cluster->motor[i]), motor_name[i], 0);
+    if (err != RM_OK)
+      goto end;
+  }
+
+  // names the controllers
+  memcpy(&motor_name[0][name_len], "_CTLFR\0", 7);
+  memcpy(&motor_name[1][name_len], "_CTLFL\0", 7);
+  memcpy(&motor_name[2][name_len], "_CTLBL\0", 7);
+  memcpy(&motor_name[3][name_len], "_CTLBR\0", 7);
+
+  // registers the controllers
+  for (int i = 0; i < 4; i++) {
+    err = pid_controller_register(&(motor_cluster->ctrl[i]), motor_name[i],
+                                  &(motor_cluster->motor_pid[i]),
+                                  &(motor_cluster->motor_feedback[i]), 1);
+    if (err != RM_OK)
+      goto end;
+  }
+
+  return RM_OK;
+end:
+  object_detach(&(motor_cluster->parent));
+
+  return err;
+}
+
+/// @brief Executes the motor cluster
+/// @param motor_cluster The motor cluster to execute
+/// @return RM_OK if the motor cluster is executed successfully
+int32_t motor_cluster_execute(struct motor_cluster *motor_cluster) {
+  float motor_out;
+  struct motor_data *pdata;
+//  struct wheel_fdb wheel_fdb[4];
+
+
+  if (motor_cluster == NULL)
+    return -RM_INVAL;
+
+  for (int i = 0; i < 4; i++) {
+    pdata = motor_device_get_data(&(motor_cluster->motor[i]));
+
+    wheel_fdb[i].total_ecd = pdata->total_ecd;
+    wheel_fdb[i].speed_rpm = pdata->speed_rpm;
+
+    controller_set_input(&motor_cluster->ctrl[i],
+                         motor_cluster->wheels.wheel_rpm[i]);
+    controller_execute(&motor_cluster->ctrl[i], (void *)pdata);
+    controller_get_output(&motor_cluster->ctrl[i], &motor_out);
+
+    motor_device_set_current(&motor_cluster->motor[i], (int16_t)motor_out);
+  }
+
+  return RM_OK;
+}
+
+/// @brief Sets the RPM of the motors in the motor cluster
+/// @param motor_cluster The motor cluster to set the RPM of
+/// @param motor1 The RPM of the first motor
+/// @param motor2 The RPM of the second motor
+/// @param motor3 The RPM of the third motor
+/// @param motor4 The RPM of the fourth motor
+int32_t motor_cluster_set_rpm(struct motor_cluster *motor_cluster, float motor1,
+                              float motor2, float motor3, float motor4) {
+  if (motor_cluster == NULL)
+    return -RM_INVAL;
+  motor_cluster->wheels.wheel_rpm[0] = motor1;
+  motor_cluster->wheels.wheel_rpm[1] = motor2;
+  motor_cluster->wheels.wheel_rpm[2] = motor3;
+  motor_cluster->wheels.wheel_rpm[3] = motor4;
+  return RM_OK;
+}
+
+/// @brief Gets the information of the motor cluster
+/// @param motor_cluster The motor cluster to get the information of
+/// @param info The information of the motor cluster
+int32_t motor_cluster_get_info(struct motor_cluster *motor_cluster,
+                               struct motor_cluster_info *info) {
+  if (motor_cluster == NULL)
+    return RM_ERROR;
+
+  for (int i = 0; i < 4; i++) {
+    info->wheel_rpm[i] = motor_cluster->wheels.wheel_rpm[i];
+  }
+
+  return RM_OK;
+}
+
+/// @brief Finds a motor cluster by name
+/// @param name The name of the motor cluster
+motor_cluster_t motor_cluster_find(const char *name) {
+  struct object *object;
+
+  object = object_find(name, Object_Class_Chassis);
+
+  return (motor_cluster_t)object;
+}
+
+/// @brief Enables the motor cluster
+/// @param motor_cluster The motor cluster to enable
+int32_t motor_cluster_enable(struct motor_cluster *motor_cluster) {
+  if (motor_cluster == NULL)
+    return -RM_INVAL;
+
+  for (int i = 0; i < 4; i++) {
+    controller_enable(&(motor_cluster->ctrl[i]));
+  }
+
+  return RM_OK;
+}
+
+/// @brief Disables the motor cluster
+/// @param motor_cluster The motor cluster to disable
+int32_t motor_cluster_disable(struct motor_cluster *motor_cluster) {
+  if (motor_cluster == NULL)
+    return -RM_INVAL;
+
+  for (int i = 0; i < 4; i++) {
+    controller_disable(&(motor_cluster->ctrl[i]));
+  }
+
+  return RM_OK;
+}
+
+/// @brief Converts the input of the PID controller
+/// @param ctrl The controller
+static int32_t motor_pid_input_convert(struct controller *ctrl, void *input) {
+  pid_feedback_t pid_fdb = (pid_feedback_t)(ctrl->feedback);
+  motor_data_t data = (motor_data_t)input;
+  pid_fdb->feedback = data->speed_rpm;
+
+  return RM_OK;
+}

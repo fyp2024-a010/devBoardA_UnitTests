@@ -1,0 +1,31 @@
+#ifndef APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+#define APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+
+#define START_PACKET 	0xF000FF
+#define END_PACKET		0xFFF0FF
+#define MAX_PACKET_SIZE 	64
+
+
+// CMD TYPES
+#define __RESERVED__ 	0x00000200
+#define CMD_VEL 		0x00000201
+#define ODOM 			0x00000202
+#define IMU 			0x00000203
+
+#define CMD_VEL_LEN 	6
+#define ODOM_LEN 		13
+#define IMU_LEN 		10
+
+#define SIGNIFICANT_FIGURE	100000.0f
+#define LITTLE_ENDIAN 		0
+
+#include <stdint.h>
+#include <stdbool.h>
+
+void process_request(uint8_t *buf);
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian);
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian);
+uint8_t get_send_status(void);
+void set_send_complete(void);
+
+#endif /* APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_ */

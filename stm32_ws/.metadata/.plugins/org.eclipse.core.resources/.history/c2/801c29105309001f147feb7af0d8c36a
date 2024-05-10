@@ -1,0 +1,17 @@
+/*
+ * mb_protocol.h
+ *
+ *  Created on: May 3, 2024
+ *      Author: bentjh01
+ */
+
+#ifndef APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+#define APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+
+#include <stdint.h>
+#include <stdbool.h>
+
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian);
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian);
+
+#endif /* APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_ */

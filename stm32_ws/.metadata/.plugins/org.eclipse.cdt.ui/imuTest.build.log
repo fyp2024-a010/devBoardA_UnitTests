@@ -1,0 +1,10 @@
+19:16:16 **** Incremental Build of configuration Debug for project imuTest ****
+make -j7 all 
+arm-none-eabi-size  imuTest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  54388	    376	  25376	  80140	  1390c	imuTest.elf
+Finished building: default.size.stdout
+ 
+
+19:16:17 Build Finished. 0 errors, 0 warnings. (took 432ms)
+

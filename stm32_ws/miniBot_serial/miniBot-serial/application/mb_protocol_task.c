@@ -15,6 +15,8 @@ static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
   if (waiting4master == 1) {
     waiting4master = 0;
     process_request(buf);
+    usb_send(get_response());
+    waiting4master = 1;
   }
   return 0;
 }
@@ -25,11 +27,12 @@ void mb_protocol_task(void const *argument) {
   // soft_timer_register(usb_tx_flush_run, NULL, 1);
 
   for (;;) {
-    if (waiting4master == 0) {
-      usb_send(get_response());
-      waiting4master = 1;
-    } else {
-      osDelay(1);
-    }
+	  osDelay(1);
+//    if (waiting4master == 0) {
+//      usb_send(get_response());
+//      waiting4master = 1;
+//    } else {
+//      osDelay(1);
+//    }
   }
 }

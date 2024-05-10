@@ -1,0 +1,49 @@
+#include "mb_protocol.h"
+
+static uint8_t expecting_start = 1;
+static uint8_t expecting_cmd = 0;
+static uint8_t expecting_data = 0;
+static uint8_t expecting_end = 0;
+
+void process_request(uint8_t *buf, uint32_t len){
+	if (sizeof(bytes) == 4){
+		int32_t rcv_value = bytes_to_int32(buf, LITTLE_ENDIAN);
+		if (rcv_value == )
+	}
+	else{
+		return
+	}
+}
+
+
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian) {
+  // Converts an int32_t value to a byte array.
+  if (is_big_endian) {
+    bytes[0] = (value >> 24) & 0xFF;
+    bytes[1] = (value >> 16) & 0xFF;
+    bytes[2] = (value >> 8) & 0xFF;
+    bytes[3] = value & 0xFF;
+  } else {
+    bytes[0] = value & 0xFF;
+    bytes[1] = (value >> 8) & 0xFF;
+    bytes[2] = (value >> 16) & 0xFF;
+    bytes[3] = (value >> 24) & 0xFF;
+  }
+  test_int32 = bytes_to_int32(bytes, 0);
+
+  return 4; // Number of bytes written
+}
+
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian) {
+  //  Converts a byte array to an int32_t value.
+
+  int32_t value = 0;
+  if (is_big_endian) {
+    // Big-endian: most significant byte first
+    value = (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
+  } else {
+    // Little-endian: least significant byte first
+    value = (bytes[3] << 24) | (bytes[2] << 16) | (bytes[1] << 8) | bytes[0];
+  }
+  return value;
+}

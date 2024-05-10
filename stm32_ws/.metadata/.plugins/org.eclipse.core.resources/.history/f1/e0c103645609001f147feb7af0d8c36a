@@ -1,0 +1,23 @@
+#ifndef APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+#define APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_
+
+#define START_4BYTE 0xF0000FFF
+#define END_4BYTE	0xFFFF0FFF
+
+
+// CMD TYPES
+#define __RESERVED__ 	0x00000200
+#define CMD_VEL 		0x00000201
+#define ODOM 			0x00000202
+#define IMU 			0x00000203
+
+#define SIGNIFICANT_FIGURE 5d
+#define LITTLE_ENDIAN 0d
+
+#include <stdint.h>
+#include <stdbool.h>
+
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian);
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian);
+
+#endif /* APPLICATION_MB_PROTOCOL_MB_PROTOCOL_H_ */

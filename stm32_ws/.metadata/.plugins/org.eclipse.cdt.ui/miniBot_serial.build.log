@@ -1,0 +1,10 @@
+18:52:08 **** Incremental Build of configuration Debug for project miniBot_serial ****
+make -j7 all 
+arm-none-eabi-size  miniBot_serial.elf 
+   text	   data	    bss	    dec	    hex	filename
+  52720	    344	  76432	 129496	  1f9d8	miniBot_serial.elf
+Finished building: default.size.stdout
+ 
+
+18:52:08 Build Finished. 0 errors, 0 warnings. (took 255ms)
+

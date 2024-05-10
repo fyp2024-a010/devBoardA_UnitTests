@@ -1,0 +1,130 @@
+#include "usbCommunication_task.h"
+#include <stdint.h>
+
+uint8_t test_fifo = 0;
+
+uint8_t int32_to_bytes(int32_t value, uint8_t *bytes, int8_t is_big_endian) {
+  // Converts an int32_t value to a byte array.
+	  if (is_big_endian) {
+	    // Big-endian: most significant byte first (handle sign extension for negative values)
+	    if (value < 0) {
+	      bytes[0] = 0xFF; // Sign extension for negative in big-endian
+	    } else {
+	      bytes[0] = 0x00;
+	    }
+	    bytes[1] = (value >> 8) & 0xFF;
+	    bytes[2] = (value >> 16) & 0xFF;
+	    bytes[3] = (value >> 24) & 0xFF;
+	  } else {
+	    // Little-endian: least significant byte first (handle sign extension for negative values)
+	    if (value < 0) {
+	      bytes[3] = 0xFF; // Sign extension for negative in little-endian
+	    } else {
+	      bytes[3] = 0x00;
+	    }
+	    bytes[2] = (value >> 8) & 0xFF;
+	    bytes[1] = (value >> 16) & 0xFF;
+	    bytes[0] = (value >> 24) & 0xFF;
+	  }
+
+  return 4; // Number of bytes written
+}
+
+int32_t bytes_to_int32(uint8_t *bytes, int8_t is_big_endian) {
+  //  Converts a byte array to an int32_t value.
+  if (sizeof(bytes) < 4) {
+    return 0; // Or return some error code
+  }
+  int32_t value = 0;
+  if (is_big_endian) {
+    // Big-endian: most significant byte first
+    value = (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
+  } else {
+    // Little-endian: least significant byte first
+    value = (bytes[3] << 24) | (bytes[2] << 16) | (bytes[1] << 8) | bytes[0];
+  }
+  return value;
+}
+
+uint8_t int16_to_bytes(int16_t value, uint8_t *bytes, int8_t is_big_endian) {
+  // Converts an int16_t value to a byte array.
+  if (is_big_endian) {
+    bytes[0] = (value >> 8) & 0xFF;
+    bytes[1] = value & 0xFF;
+  } else {
+    bytes[0] = value & 0xFF;
+    bytes[1] = (value >> 8) & 0xFF;
+  }
+
+  return 2; // Number of bytes written
+}
+
+int16_t bytes_to_int16(uint8_t *bytes, int8_t is_big_endian) {
+  //  Converts a byte array to an int16_t value.
+  if (sizeof(bytes) < 2) {
+    return 0; // Or return some error code
+  }
+
+  int16_t value = 0;
+  if (is_big_endian) {
+    // Big-endian: most significant byte first
+    value = (bytes[0] << 8) | bytes[1];
+  } else {
+    // Little-endian: least significant byte first
+    value = (bytes[1] << 8) | bytes[0];
+  }
+  return value;
+}
+
+void usb_send(int32_t data) {
+  if (sizeof(data) == 1) {
+    uint8_t buf[1];
+    buf[0] = data;
+    if (test_fifo == 1) {
+      usb_vcp_tx_write_fifo(buf, sizeof(buf));
+    } else {
+      transmit_processing_stm32_default(buf, sizeof(buf));
+    }
+    return;
+  } else if (sizeof(data) == 2) {
+    uint8_t buf[2];
+    int16_to_bytes(data, buf, 0);
+    if (test_fifo == 1) {
+      usb_vcp_tx_write_fifo(buf, sizeof(buf));
+    } else {
+      transmit_processing_stm32_default(buf, sizeof(buf));
+    }
+    return;
+  } else if (sizeof(data) == 4) {
+    uint8_t buf[4];
+    int32_to_bytes(data, buf, 0);
+    if (test_fifo == 1) {
+      usb_vcp_tx_write_fifo(buf, sizeof(buf));
+    } else {
+      transmit_processing_stm32_default(buf, sizeof(buf));
+    }
+  }
+}
+
+int8_t test8;
+int16_t test16;
+int32_t test32;
+
+static int32_t usb_rcv_callback(uint8_t *buf, uint32_t len) {
+if (sizeof(buf) == 4) {
+	test32 = bytes_to_int32(buf, 1);
+    usb_send(test32);
+  }
+  return 0;
+}
+
+void usbComm_task(void const *argument) {
+  usb_vcp_init(true);
+  usb_vcp_rx_callback_register(usb_rcv_callback);
+  soft_timer_register(usb_tx_flush_run, NULL, 1);
+
+  for (;;) {
+    //    usb_send(32);
+    osDelay(1);
+  }
+}

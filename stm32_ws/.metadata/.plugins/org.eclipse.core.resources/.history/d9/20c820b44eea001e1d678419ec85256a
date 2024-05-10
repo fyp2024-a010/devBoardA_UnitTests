@@ -1,0 +1,13 @@
+/*
+ * init.c
+ *
+ *  Created on: Mar 25, 2024
+ *      Author: bentjh01
+ */
+
+
+osThreadId comm_task_t;
+
+void task_init(void){
+
+}

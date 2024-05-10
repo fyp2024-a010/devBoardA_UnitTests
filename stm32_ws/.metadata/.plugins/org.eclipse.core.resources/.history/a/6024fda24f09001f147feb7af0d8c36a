@@ -1,0 +1,11 @@
+../usbCommunication/boards/drv_uart.c:47:6:usart_rx_callback_register	16	static
+../usbCommunication/boards/drv_uart.c:59:6:HAL_UART_RxHalfCpltCallback	16	static
+../usbCommunication/boards/drv_uart.c:74:6:HAL_UART_RxCpltCallback	16	static
+../usbCommunication/boards/drv_uart.c:89:6:HAL_UART_TxCpltCallback	16	static
+../usbCommunication/boards/drv_uart.c:113:6:usart6_idle_callback	16	static
+../usbCommunication/boards/drv_uart.c:140:6:usart6_manage_init	8	static
+../usbCommunication/boards/drv_uart.c:158:5:usart6_printf	144	static
+../usbCommunication/boards/drv_uart.c:184:6:usart6_transmit	16	static
+../usbCommunication/boards/drv_uart.c:189:10:usart_transmit	32	static
+../usbCommunication/boards/drv_uart.c:240:13:usart_transmit_hook	24	static
+../usbCommunication/boards/drv_uart.c:268:13:usart_rec_to_buff	40	static

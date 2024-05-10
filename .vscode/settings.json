@@ -1,0 +1,21 @@
+{
+  "files.associations": {
+    "protocol.h": "c",
+    "protocol_common.h": "c",
+    "protocol_cfg.h": "c",
+    "stm32f4xx_hal.h": "c",
+    "freertos.h": "c",
+    "cmsis_os.h": "c",
+    "string.h": "c",
+    "sys.h": "c",
+    "mf_crc.h": "c",
+    "communicate.h": "c",
+    "init.h": "c",
+    "pid.h": "c",
+    "ios": "c",
+    "motortest.h": "c",
+    "can.h": "c",
+    "stdint.h": "c",
+    "blinky_task.h": "c"
+  }
+}
