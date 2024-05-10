@@ -1,2 +1,0 @@
-../miniBot-serial/application/init.c:7:6:hw_init	8	static
-../miniBot-serial/application/init.c:9:6:task_init	80	static
